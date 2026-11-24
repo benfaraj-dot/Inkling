@@ -94,7 +94,8 @@ nav{display:flex;align-items:center;gap:2px}
 .coin:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .tile.odd{outline:3px solid var(--red);outline-offset:2px}
 .tile.gold{outline:3px solid #e0a526;outline-offset:2px;background:color-mix(in srgb,#e0a526 22%,var(--card))}
-.mrow.hint i{box-shadow:inset 0 0 0 3px #e0a526}
+.tile.x{opacity:.4;text-decoration:line-through 3px var(--red)}
+.tile.x[aria-pressed=true]{opacity:.75}
 .look{appearance:none;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border:2px dashed var(--pen);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;background:transparent;color:var(--pen);font:700 16px/1 Kalam,cursive;cursor:pointer}
 .look svg{width:20px;height:20px}
 .look[aria-pressed=true]{background:var(--pen);color:var(--card);border-style:solid}
@@ -162,7 +163,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="nb" id="nextp" aria-label="Next page">&rsaquo;</button>
   </nav>
 </header>
-<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="coin" id="hintbtn" aria-disabled="true" aria-label="Hint coin flip, only works when you are one away"><svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" fill="none" stroke="#9a6e10" stroke-width="1.4"></circle><path d="M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z" fill="#8a5f0c"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
+<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="coin" id="hintbtn" aria-disabled="true" aria-label="Hint coin flip, crosses out half the options when you are one away"><svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" fill="none" stroke="#9a6e10" stroke-width="1.4"></circle><path d="M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z" fill="#8a5f0c"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
 <p class="sub" id="sub">Make four groups of four.</p>
 
 <div class="board">
@@ -282,7 +283,8 @@ function render(newL){
   $("#pg").textContent=label(cur);
   $("#rows").innerHTML=s.solved.map(l=>`<div class="row h${l}${l===newL?" new":""}"><b>${esc(g[l][0])}</b><span>${g[l][1].map(esc).join(", ")}</span></div>`).join("");
   const gone=new Set(s.solved.flatMap(l=>g[l][1]));
-  $("#grid").innerHTML=s.order.filter(w=>!gone.has(w)).map(w=>`<button class="tile" data-w="${esc(w)}" aria-pressed="${sel.includes(w)}" style="--r:${rot(w)}deg"><span>${esc(w)}</span></button>`).join("");
+  const xs=new Set(Object.entries(s.cross||{}).filter(([l])=>!s.solved.includes(+l)).flatMap(([,ws])=>ws));
+  $("#grid").innerHTML=s.order.filter(w=>!gone.has(w)).map(w=>`<button class="tile${xs.has(w)?" x":""}" data-w="${esc(w)}" aria-pressed="${sel.includes(w)}" style="--r:${rot(w)}deg"><span>${esc(w)}</span></button>`).join("");
   $("#dots").innerHTML=[0,1,2,3].map(i=>`<i class="dot${i<s.mistakes?" gone":""}"></i>`).join("");
   $("#play").hidden=s.done;
   $("#end").hidden=!s.done||revealing;
@@ -437,17 +439,15 @@ async function useHint(){
     emote("wrong",1800);busy=false;updBtns();return;
   }
   const l=s.near,g=G()[l][1],was=s.nearSel||[];
-  const odd=was.find(w=>!g.includes(w)),miss=g.find(w=>!was.includes(w));
-  note("blurbo's tip");
-  const o=odd&&tileOf(odd),mi=miss&&tileOf(miss);
-  if(o)o.classList.add("odd");if(mi)mi.classList.add("gold");
-  await sleep(1500);
-  s.solved.push(l);s.hints=(s.hints||0)+1;s.guesses.push(["c",l]);s.near=null;s.nearSel=null;
-  sel=[];
-  if(s.solved.length===4){s.done=true;s.won=true;}
-  save();busy=false;render(l);
-  if(s.won){note("solved");dance();}else emote("correct",1800);
-  updBtns();
+  const solvedW=new Set(s.solved.flatMap(k=>G()[k][1]));
+  const opts=s.order.filter(w=>!solvedW.has(w)&&!was.includes(w));
+  const wrong=shuffle(opts.filter(w=>!g.includes(w))).slice(0,Math.floor(opts.length/2));
+  s.cross=s.cross||{};s.cross[l]=(s.cross[l]||[]).concat(wrong);
+  s.hints=(s.hints||0)+1;s.near=null;s.nearSel=null;save();
+  note("50/50!");
+  for(const w of wrong){const t=tileOf(w);if(t)t.classList.add("x");await sleep(90);}
+  emote("correct",1800);
+  busy=false;updBtns();
 }
 function go(i){cur=(i+P.length)%P.length;sel=[];setLook(false);save();render();stopDance();rest();}
 
@@ -485,7 +485,7 @@ $("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();c
 $("#erase").addEventListener("click",()=>{delete S[cur];sel=[];save();render();closeSheet();note("fresh page");});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#sheet").hidden)closeSheet();else if(looking)setLook(false);}});
 $("#copy").addEventListener("click",()=>{
-  const s=st(),txt=`Inklings, ${label(cur)}\n`+s.guesses.map(r=>r[0]==="c"?EMO[r[1]].repeat(4)+" \u{1FA99}":r.map(l=>EMO[l]).join("")).join("\n");
+  const s=st(),txt=`Inklings, ${label(cur)}${s.hints?" "+"\u{1FA99}".repeat(s.hints):""}\n`+s.guesses.map(r=>r[0]==="c"?EMO[r[1]].repeat(4)+" \u{1FA99}":r.map(l=>EMO[l]).join("")).join("\n");
   try{navigator.clipboard.writeText(txt).then(()=>note("copied"),()=>note("couldn't copy"));}catch(e){note("couldn't copy");}
 });
 
