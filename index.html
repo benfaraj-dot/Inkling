@@ -95,6 +95,7 @@ nav{display:flex;align-items:center;gap:2px}
 .mrow{display:flex;gap:5px}
 .mrow i{width:26px;height:20px;border-radius:3px 7px 4px 6px}
 .msg{text-align:center;color:var(--soft);padding:40px 0}
+.tmr{font:700 1.15em/1 Caveat,cursive;color:var(--pen);font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .sheet{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(3px)}
 .panel{width:min(460px,100%);max-height:90%;overflow:auto;background:var(--card);border:2px solid var(--ink);border-radius:18px 6px 20px 8px/8px 20px 6px 18px;padding:16px 18px 20px;box-shadow:4px 6px 0 color-mix(in srgb,var(--ink) 18%,transparent);display:grid;gap:14px}
@@ -175,13 +176,14 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
   <h2 id="endT"></h2>
   <p id="endS"></p>
   <div id="mini"></div>
+  <p class="nx" style="font-size:19px;color:var(--ink)">Next page in <b class="tmr">--:--:--</b></p>
   <div class="ctl">
     <button class="btn" id="copy">Copy results</button>
     <button class="btn primary" id="next">Next page</button>
   </div>
 </section>
 
-<footer id="foot">A new page lands every morning. Your progress saves in this browser.</footer>
+<footer id="foot"><span class="nx">Next page in <b class="tmr">--:--:--</b></span><br>Your progress saves in this browser.</footer>
 </main>
 
 <div class="sheet" id="sheet" hidden>
@@ -366,6 +368,15 @@ function setBl(off,anim){
     else sg.classList.add("off");
   }else{sg.classList.remove("off");rest();}
 }
+function tick(){
+  const n=new Date(),t=new Date(n);t.setHours(24,0,0,0);
+  const left=Math.floor((t-n)/1000),h=Math.floor(left/3600),m=Math.floor(left%3600/60),sec=left%60;
+  const d=new Date(n.getFullYear(),n.getMonth(),n.getDate()),today=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  document.querySelectorAll(".nx").forEach(e=>{
+    if(today!==TODAY){e.textContent="A new page is landing. Reopen in a few minutes.";}
+    else{const b=e.querySelector(".tmr");if(b)b.textContent=`${pad(h)}:${pad(m)}:${pad(sec)}`;}
+  });
+}
 function poke(){
   clearTimeout(blIdle);
   blIdle=setTimeout(()=>{if(BL&&!busy&&P.length&&!st().done&&!looking&&!sel.length)emote("escape",3200);poke();},16000);
@@ -432,6 +443,7 @@ async function start(d){
   }
   pickStart();save();render();
   await loadBl();if(BL)setBl(blOff,false);rest();poke();
+  tick();setInterval(tick,1000);
 }
 window.claude?.hot?.snapshot?.(()=>({S,cur,lastDay,blOff}));
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
