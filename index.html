@@ -145,7 +145,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .dbtn{position:absolute;left:112px;top:66px;width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;border-radius:10px;background:none;color:var(--ink);cursor:pointer;z-index:2}
 .dbtn:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
 .dbtn:focus-visible{outline:3px solid var(--red);outline-offset:2px}
-.dbtn svg{width:28px;height:28px}
+.dbtn svg{width:38px;height:24px}
 .stage.off .dbtn{display:none}
 .stage.off{height:44px}
 .stage.off::after,.stage.off #bl{display:none}
@@ -154,6 +154,8 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .m-gone{animation:bgone .6s ease-in forwards}
 @keyframes bgone{30%{transform:rotate(-14deg) scale(1.05)}100%{transform:scale(1.3,0);opacity:0}}
 .m-bob{animation:bbob .45s ease-in-out infinite alternate}.m-sway{animation:bsway .9s ease-in-out infinite alternate}.m-shake{animation:bshake .12s linear infinite alternate}.m-bounce{animation:bbounce .35s ease-in-out infinite alternate}.m-wiggle{animation:bwig .2s ease-in-out infinite alternate}.m-float{animation:bfloat 1.6s ease-in-out infinite alternate}.m-pulse{animation:bpulse .5s ease-in-out infinite alternate}.m-melt{animation:bmelt 1.2s ease-in-out infinite alternate}.m-stretch{animation:bstretch .8s ease-in-out infinite alternate}.m-spin{animation:bspin .6s ease-in-out infinite}
+.calm.m-bob{animation:cbob 1.8s ease-in-out infinite alternate}.calm.m-sway,.calm.m-wiggle{animation:csway 2.6s ease-in-out infinite alternate}.calm.m-shake{animation:cshake 1.6s ease-in-out infinite alternate}.calm.m-bounce,.calm.m-float{animation:cfloat 2.4s ease-in-out infinite alternate}.calm.m-pulse{animation:cpulse 2.2s ease-in-out infinite alternate}.calm.m-melt,.calm.m-stretch{animation:cbob 2.4s ease-in-out infinite alternate}.calm.m-spin{animation:none}
+@keyframes cbob{to{transform:scale(1.01,.985)}}@keyframes csway{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}@keyframes cshake{from{transform:translateX(-1px)}to{transform:translateX(1px)}}@keyframes cfloat{to{transform:translateY(-3px)}}@keyframes cpulse{to{transform:scale(1.02)}}
 @keyframes bbob{to{transform:scale(1.03,.95)}}@keyframes bsway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}@keyframes bshake{from{transform:translateX(-3px)}to{transform:translateX(3px)}}@keyframes bbounce{to{transform:translateY(-8px) scale(.98,1.03)}}@keyframes bwig{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}@keyframes bfloat{to{transform:translateY(-4px)}}@keyframes bpulse{to{transform:scale(1.06)}}@keyframes bmelt{to{transform:scale(1.04,.9)}}@keyframes bstretch{to{transform:scale(.95,1.06)}}@keyframes bspin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
 @media(min-width:600px){main{padding-top:30px}}
 @media(max-width:600px){body::before{left:8px;width:1.5px;opacity:.6}}
@@ -173,7 +175,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="nb" id="nextp" aria-label="Next page">&rsaquo;</button>
   </nav>
 </header>
-<div class="stage" id="stage"><button class="dbtn" id="dbtn" aria-label="Make Blurbo dance"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 24 V7 L27 4 V20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"></path><ellipse cx="8.5" cy="24" rx="4.5" ry="3.6" fill="currentColor"></ellipse><ellipse cx="23.5" cy="20.5" rx="4.5" ry="3.6" fill="currentColor"></ellipse><path d="M12 12 L27 9" stroke="currentColor" stroke-width="2.6"></path></svg></button><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="coin" id="hintbtn" aria-disabled="true" aria-label="Hint coin flip, crosses out half the options when you are one away"><svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" fill="none" stroke="#9a6e10" stroke-width="1.4"></circle><path d="M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z" fill="#8a5f0c"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
+<div class="stage" id="stage"><button class="dbtn" id="dbtn" aria-label="Make Blurbo dance"><svg viewBox="0 0 40 24" aria-hidden="true"><path d="M4 17 C2 13 6 8 14 6 L30 3 C36 2 39 5 37 9 C35 13 30 15 24 17 L10 20 C7 21 5 19 4 17 Z" fill="#e0a526" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M12 9.5 l3 6 M19 7.5 l3 6 M26 6 l3 5.5" fill="none" stroke="#8a5f0c" stroke-width="2" stroke-linecap="round"></path></svg></button><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="coin" id="hintbtn" aria-disabled="true" aria-label="Hint coin flip, crosses out half the options when you are one away"><svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" fill="none" stroke="#9a6e10" stroke-width="1.4"></circle><path d="M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z" fill="#8a5f0c"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
 <p class="sub" id="sub">Make four groups of four.</p>
 
 <div class="board">
@@ -360,18 +362,19 @@ function pickV(list,key){
   const v=pool[Math.floor(Math.random()*pool.length)]||pool[0];
   blLast[key]=v.id;return v;
 }
-function blShow(svg,motion){
+function blShow(svg,motion,calm){
   $("#blfig").innerHTML=svg||"";
   const ok=BL&&BL.motions&&BL.motions.includes(motion);
-  $("#blmv").setAttribute("class","m-"+(ok?motion:"none"));
+  $("#blmv").setAttribute("class","m-"+(ok?motion:"none")+(calm?" calm":""));
 }
+const CALM=new Set(["idle","pick1","pick2","pick3","pick4","look","cheat"]);
 function stopDance(){clearTimeout(blDance);blDance=0;}
 function emote(key,hold){
   if(!BL||!BL.emotes||blOff||blClip)return;
   stopDance();clearTimeout(blT);
   const v=pickV(BL.emotes[key],key)||pickV(BL.emotes.idle,"idle");
   if(!v)return;
-  blShow(v.svg,v.motion);
+  blShow(v.svg,v.motion,CALM.has(key));
   if(hold)blT=setTimeout(rest,hold);
 }
 function rest(){
@@ -433,7 +436,7 @@ function tick(){
 }
 function poke(){
   clearTimeout(blIdle);
-  blIdle=setTimeout(()=>{if(BL&&!busy&&P.length&&!st().done&&!looking&&!sel.length)emote("escape",3200);poke();},16000);
+  blIdle=setTimeout(()=>{if(BL&&!busy&&P.length&&!st().done&&!looking&&!sel.length)emote("escape",3200);poke();},45000);
 }
 
 function showNah(){
@@ -444,10 +447,14 @@ function showNah(){
   setTimeout(()=>mn.classList.add("jolt"),170);
   setTimeout(()=>{n.classList.remove("on");n.textContent="";mn.classList.remove("jolt");},1700);
 }
+let dSpam=0,dLast=0;
 async function danceReq(){
   if(busy||!BL||blOff||blClip||!P.length)return;
-  const s=st();
-  if(!s.done&&Math.random()<.01){
+  const s=st(),now=Date.now();
+  if(now-dLast>10000)dSpam=0;
+  const odds=Math.min(1,.01+.07*dSpam);dSpam++;dLast=now;
+  if(!s.done&&Math.random()<odds){
+    dSpam=0;
     busy=true;updBtns();setLook(false);
     showNah();s.mistakes++;save();render();emote("wrong",1800);
     await sleep(1700);
