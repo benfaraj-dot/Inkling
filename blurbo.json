@@ -323,5 +323,13 @@
    "date": "2026-11-24",
    "change": "Gloves: added a soft cream shadow along the lower right of each glove and a third finger crease, so the white cartoon gloves look rounder and less flat."
   }
- ]
+ ],
+ "outfits": {
+  "thobe": {
+   "use": "Ramadan through Eid al-Fitr",
+   "torso": "<g id=\"torso\"><rect x=\"93\" y=\"108\" width=\"14\" height=\"16\" fill=\"#141310\"></rect><path d=\"M64 128 C68 120 84 118 100 118 C116 118 132 120 136 128 L143 198 L147 268 C128 275 72 275 53 268 L57 198 Z\" fill=\"#f3f0e6\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><path d=\"M78 196 C76 224 74 246 72 266 M122 196 C124 224 126 246 128 266 M90 214 C90 236 89 252 88 268\" fill=\"none\" stroke=\"#dcd5c3\" stroke-width=\"2.2\" stroke-linecap=\"round\"></path><path d=\"M86 119 C90 127 110 127 114 119 L114 124 C110 132 90 132 86 124 Z\" fill=\"#f3f0e6\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><path d=\"M97 129 L97 166 L103 166 L103 129\" fill=\"none\" stroke=\"#dcd5c3\" stroke-width=\"1.8\" stroke-linejoin=\"round\"></path><g fill=\"#e0a526\"><circle cx=\"100\" cy=\"137\" r=\"2.2\"></circle><circle cx=\"100\" cy=\"147\" r=\"2.2\"></circle><circle cx=\"100\" cy=\"157\" r=\"2.2\"></circle></g><path d=\"M113 146 h15 v13 C124 161 117 161 113 159 Z\" fill=\"none\" stroke=\"#dcd5c3\" stroke-width=\"1.8\" stroke-linejoin=\"round\"></path><rect x=\"122\" y=\"137\" width=\"3.6\" height=\"11\" rx=\"1.5\" fill=\"#141310\"></rect><rect x=\"121.6\" y=\"140\" width=\"4.4\" height=\"2\" fill=\"#e0a526\"></rect><use href=\"#gs\" transform=\"translate(84 140) scale(.6)\" fill=\"#e0a526\"></use></g>",
+   "legs": "<g id=\"legs\"><path d=\"M77 262 h21 l3 18 h-27 Z M102 262 h21 l3 18 h-27 Z\" fill=\"#141310\"></path></g>",
+   "style": "<style>#bl path[stroke=\"#22306b\"]{stroke:#f3f0e6}</style>"
+  }
+ }
 }
