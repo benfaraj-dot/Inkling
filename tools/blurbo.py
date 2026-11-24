@@ -6,10 +6,15 @@
   python3 tools/blurbo.py check             validate blurbo.json (run before every commit)
   python3 tools/blurbo.py render out.png [filter]   contact sheet of every figure
   python3 tools/blurbo.py smoke out.png     load the real index.html and show every figure in the game
+  python3 tools/blurbo.py props out.png     sheet of every prop in the library (red dot = its 0,0 anchor)
 
 Outfits live in blurbo.json "outfits": {name: {"for", "replace": {partId: full <g id=partId> markup},
 "layer": {partId: markup drawn on top of that part}, "css": "rules"}}. Layered parts keep the
 current base (renamed partId__base), so daily design refinements are never lost.
+
+Props (gadgets) live in defs as <g id="p-name"> with a catalog in blurbo.json "props":
+[{"id", "name", "added", "anchor", "tags"}]. Any emote or dance uses one with
+<use href="#p-name" transform="translate(x y) rotate(a) scale(s)"></use>, usually followed by a glove at the grip.
 """
 import json, re, sys, os, xml.etree.ElementTree as ET
 
@@ -113,7 +118,25 @@ def check(b):
         for pid, mk in o.get('layer', {}).items():
             try: ET.fromstring('<g xmlns="http://www.w3.org/2000/svg">%s</g>' % mk)
             except Exception as e: errs.append('outfit %s layer %s: %s' % (n, pid, e))
+    cat = b.get('props', [])
+    cids = [p.get('id') for p in cat]
+    if len(set(cids)) != len(cids): errs.append('duplicate prop ids in catalog')
+    for p in cat:
+        if not all(p.get(k) for k in ('id', 'name', 'added', 'anchor')): errs.append('prop %s: catalog entry needs id, name, added, anchor' % p.get('id'))
+        if not str(p.get('id', '')).startswith('p-'): errs.append('prop %s: id must start with p-' % p.get('id'))
+        if p.get('id') not in ids: errs.append('prop %s: missing from defs' % p.get('id'))
+    for i in ids:
+        if i.startswith('p-') and i not in cids: errs.append('prop #%s in defs but not in the props catalog' % i)
     return errs
+
+def props_sheet(b, png):
+    from playwright.sync_api import sync_playwright
+    cells = ''.join('<div style="display:inline-block;margin:4px;text-align:center;font:11px sans-serif;width:180px"><svg id="bl" xmlns="http://www.w3.org/2000/svg" viewBox="-90 -90 180 180" width="180" height="180" style="background:#f6f1e3"><use href="#%s"></use><circle r="2.5" fill="red"></circle></svg><br>%s<br>%s</div>' % (p['id'], p['id'], p['name']) for p in b.get('props', []))
+    html = '<html><body style="margin:0;width:1180px"><svg width="0" height="0" style="position:absolute"><defs>%s</defs></svg>%s</body></html>' % (b['defs'], cells)
+    with sync_playwright() as pw:
+        br = pw.chromium.launch(); pg = br.new_page(viewport={'width': 1180, 'height': 400})
+        pg.set_content(html); pg.screenshot(path=png, full_page=True); br.close()
+    print('rendered %d props -> %s' % (len(b.get('props', [])), png))
 
 def figures(b, flt=None):
     out = []
@@ -177,4 +200,5 @@ if __name__ == '__main__':
     elif a[0] == 'check':
         e = check(b); print('\n'.join(e) if e else 'blurbo.json OK'); sys.exit(1 if e else 0)
     elif a[0] == 'render': render(b, a[1], a[2] if len(a) > 2 else None)
+    elif a[0] == 'props': props_sheet(b, a[1])
     elif a[0] == 'smoke': sys.exit(0 if smoke(a[1]) else 1)

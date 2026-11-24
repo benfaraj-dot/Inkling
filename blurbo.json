@@ -1,6 +1,6 @@
 {
  "version": 1,
- "defs": "<g id=\"pud\"><line x1=\"4\" y1=\"284\" x2=\"196\" y2=\"284\" stroke=\"#141310\" stroke-width=\"3\" stroke-linecap=\"round\"></line><path d=\"M42 284 C42 274 72 272 100 274 C128 272 158 274 158 284 C158 292 128 294 100 293 C72 294 42 292 42 284 Z\" fill=\"#141310\"></path><path d=\"M126 290 C130 302 128 310 124 312 C120 310 120 302 122 290 Z\" fill=\"#141310\"></path></g>\n<g id=\"legs\"><path d=\"M76 196 L98 196 L97 266 L79 266 Z\" fill=\"#1b2657\"></path><path d=\"M102 196 L124 196 L121 266 L103 266 Z\" fill=\"#1b2657\"></path><path d=\"M88 202 v58 M112 202 v58\" stroke=\"#33438a\" stroke-width=\"1.5\"></path><path d=\"M77 262 h21 l3 18 h-27 Z M102 262 h21 l3 18 h-27 Z\" fill=\"#141310\"></path></g>\n<g id=\"torso\"><rect x=\"93\" y=\"108\" width=\"14\" height=\"16\" fill=\"#141310\"></rect><path d=\"M64 128 C68 120 84 118 100 118 C116 118 132 120 136 128 L142 196 C128 204 72 204 58 196 Z\" fill=\"#22306b\"></path><path d=\"M90 118 L100 144 L110 118 Z\" fill=\"#fefdf9\"></path><path d=\"M98 122 L102 122 L104 146 L100 152 L96 146 Z\" fill=\"#e0a526\"></path><path d=\"M90 118 L100 144 L88 162 L79 124 Z M110 118 L100 144 L112 162 L121 124 Z\" fill=\"#141310\"></path><path d=\"M60 191 C76 199 124 199 140 191\" fill=\"none\" stroke=\"#1b2657\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M83 128 L89 156 M117 128 L111 156\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path><path d=\"M67 180 L84 182 M116 182 L133 180\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.6\" stroke-linecap=\"round\"></path><path d=\"M68 183.5 L83 185.2 M117 185.2 L132 183.5\" fill=\"none\" stroke=\"#33438a\" stroke-width=\"1.2\" stroke-linecap=\"round\"></path><g fill=\"#e0a526\"><circle cx=\"94\" cy=\"170\" r=\"2.6\"></circle><circle cx=\"106\" cy=\"170\" r=\"2.6\"></circle><circle cx=\"94\" cy=\"184\" r=\"2.6\"></circle><circle cx=\"106\" cy=\"184\" r=\"2.6\"></circle><path d=\"M121 138 L131 136 L129 143 Z\"></path></g><use href=\"#gs\" transform=\"translate(85 134) scale(.7)\" fill=\"#e0a526\"></use></g>\n<g id=\"hd\"><path d=\"M100 40 C128 76 148 112 148 152 C148 190 127 212 100 212 C73 212 52 190 52 152 C52 112 72 76 100 40 Z\" fill=\"#141310\"></path><path d=\"M100 44 C92 22 108 8 126 12 C142 16 140 34 126 33 C118 32 118 24 124 22\" fill=\"none\" stroke=\"#141310\" stroke-width=\"9\" stroke-linecap=\"round\"></path><path d=\"M68 132 C67 110 76 90 90 72\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"5\" stroke-linecap=\"round\"></path><path d=\"M114 17 C119 13 127 13 131 18\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"3\" stroke-linecap=\"round\"></path><circle cx=\"76\" cy=\"104\" r=\"3.5\" fill=\"#fefdf9\" opacity=\".75\"></circle></g>\n<g id=\"ey\"><ellipse cx=\"85\" cy=\"122\" rx=\"12\" ry=\"16\" fill=\"#fefdf9\"></ellipse><ellipse cx=\"115\" cy=\"122\" rx=\"12\" ry=\"16\" fill=\"#fefdf9\"></ellipse></g>\n<g id=\"gr\"><path d=\"M78 156 C84 178 116 178 122 156 C110 163 90 163 78 156 Z\" fill=\"#fefdf9\"></path><rect x=\"103\" y=\"161.5\" width=\"7\" height=\"8\" rx=\"1.5\" fill=\"#e0a526\"></rect></g>\n<g id=\"gb\"><path d=\"M76 154 C80 188 120 188 124 154 C110 160 90 160 76 154 Z\" fill=\"#fefdf9\"></path><path d=\"M88 176 C94 170 106 170 112 176 C106 180 94 180 88 176 Z\" fill=\"#c3311f\"></path><rect x=\"104\" y=\"158\" width=\"7\" height=\"8\" rx=\"1.5\" fill=\"#e0a526\"></rect></g>\n<g id=\"gl\"><circle r=\"10\" fill=\"#ffffff\" stroke=\"#141310\" stroke-width=\"3\"></circle><path d=\"M-6.6 4.8 A8.2 8.2 0 0 0 7.9 -1.6 C6.6 3.4 1.6 6.6 -6.6 4.8 Z\" fill=\"#e3ded0\"></path><circle cx=\"-4.2\" cy=\"-5\" r=\"1.5\" fill=\"#fefdf9\"></circle><path d=\"M-4.5 -2.5 v5.5 M0.5 -4 v7 M5 -2.5 v4.5\" stroke=\"#141310\" stroke-width=\"1.9\" stroke-linecap=\"round\"></path></g>\n<g id=\"mic\"><rect x=\"-4\" y=\"0\" width=\"8\" height=\"34\" rx=\"3\" fill=\"#141310\"></rect><rect x=\"-5\" y=\"6\" width=\"10\" height=\"4\" fill=\"#e0a526\"></rect><circle cx=\"0\" cy=\"-6\" r=\"9\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2.5\"></circle><path d=\"M-6 -6 h12 M0 -13 v14\" stroke=\"#9a6e10\" stroke-width=\"1.5\"></path></g>\n<path id=\"gs\" d=\"M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z\"></path>\n<path id=\"sp\" d=\"M0 -8 C1 -2 2 -1 8 0 C2 1 1 2 0 8 C-1 2 -2 1 -8 0 C-2 -1 -1 -2 0 -8 Z\"></path>",
+ "defs": "<g id=\"pud\"><line x1=\"4\" y1=\"284\" x2=\"196\" y2=\"284\" stroke=\"#141310\" stroke-width=\"3\" stroke-linecap=\"round\"></line><path d=\"M42 284 C42 274 72 272 100 274 C128 272 158 274 158 284 C158 292 128 294 100 293 C72 294 42 292 42 284 Z\" fill=\"#141310\"></path><path d=\"M126 290 C130 302 128 310 124 312 C120 310 120 302 122 290 Z\" fill=\"#141310\"></path></g>\n<g id=\"legs\"><path d=\"M76 196 L98 196 L97 266 L79 266 Z\" fill=\"#1b2657\"></path><path d=\"M102 196 L124 196 L121 266 L103 266 Z\" fill=\"#1b2657\"></path><path d=\"M88 202 v58 M112 202 v58\" stroke=\"#33438a\" stroke-width=\"1.5\"></path><path d=\"M77 262 h21 l3 18 h-27 Z M102 262 h21 l3 18 h-27 Z\" fill=\"#141310\"></path></g>\n<g id=\"torso\"><rect x=\"93\" y=\"108\" width=\"14\" height=\"16\" fill=\"#141310\"></rect><path d=\"M64 128 C68 120 84 118 100 118 C116 118 132 120 136 128 L142 196 C128 204 72 204 58 196 Z\" fill=\"#22306b\"></path><path d=\"M90 118 L100 144 L110 118 Z\" fill=\"#fefdf9\"></path><path d=\"M98 122 L102 122 L104 146 L100 152 L96 146 Z\" fill=\"#e0a526\"></path><path d=\"M90 118 L100 144 L88 162 L79 124 Z M110 118 L100 144 L112 162 L121 124 Z\" fill=\"#141310\"></path><path d=\"M60 191 C76 199 124 199 140 191\" fill=\"none\" stroke=\"#1b2657\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M83 128 L89 156 M117 128 L111 156\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path><path d=\"M67 180 L84 182 M116 182 L133 180\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.6\" stroke-linecap=\"round\"></path><path d=\"M68 183.5 L83 185.2 M117 185.2 L132 183.5\" fill=\"none\" stroke=\"#33438a\" stroke-width=\"1.2\" stroke-linecap=\"round\"></path><g fill=\"#e0a526\"><circle cx=\"94\" cy=\"170\" r=\"2.6\"></circle><circle cx=\"106\" cy=\"170\" r=\"2.6\"></circle><circle cx=\"94\" cy=\"184\" r=\"2.6\"></circle><circle cx=\"106\" cy=\"184\" r=\"2.6\"></circle><path d=\"M121 138 L131 136 L129 143 Z\"></path></g><use href=\"#gs\" transform=\"translate(85 134) scale(.7)\" fill=\"#e0a526\"></use></g>\n<g id=\"hd\"><path d=\"M100 40 C128 76 148 112 148 152 C148 190 127 212 100 212 C73 212 52 190 52 152 C52 112 72 76 100 40 Z\" fill=\"#141310\"></path><path d=\"M100 44 C92 22 108 8 126 12 C142 16 140 34 126 33 C118 32 118 24 124 22\" fill=\"none\" stroke=\"#141310\" stroke-width=\"9\" stroke-linecap=\"round\"></path><path d=\"M68 132 C67 110 76 90 90 72\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"5\" stroke-linecap=\"round\"></path><path d=\"M114 17 C119 13 127 13 131 18\" fill=\"none\" stroke=\"#3d4f8a\" stroke-width=\"3\" stroke-linecap=\"round\"></path><circle cx=\"76\" cy=\"104\" r=\"3.5\" fill=\"#fefdf9\" opacity=\".75\"></circle></g>\n<g id=\"ey\"><ellipse cx=\"85\" cy=\"122\" rx=\"12\" ry=\"16\" fill=\"#fefdf9\"></ellipse><ellipse cx=\"115\" cy=\"122\" rx=\"12\" ry=\"16\" fill=\"#fefdf9\"></ellipse></g>\n<g id=\"gr\"><path d=\"M78 156 C84 178 116 178 122 156 C110 163 90 163 78 156 Z\" fill=\"#fefdf9\"></path><rect x=\"103\" y=\"161.5\" width=\"7\" height=\"8\" rx=\"1.5\" fill=\"#e0a526\"></rect></g>\n<g id=\"gb\"><path d=\"M76 154 C80 188 120 188 124 154 C110 160 90 160 76 154 Z\" fill=\"#fefdf9\"></path><path d=\"M88 176 C94 170 106 170 112 176 C106 180 94 180 88 176 Z\" fill=\"#c3311f\"></path><rect x=\"104\" y=\"158\" width=\"7\" height=\"8\" rx=\"1.5\" fill=\"#e0a526\"></rect></g>\n<g id=\"gl\"><circle r=\"10\" fill=\"#ffffff\" stroke=\"#141310\" stroke-width=\"3\"></circle><path d=\"M-6.6 4.8 A8.2 8.2 0 0 0 7.9 -1.6 C6.6 3.4 1.6 6.6 -6.6 4.8 Z\" fill=\"#e3ded0\"></path><circle cx=\"-4.2\" cy=\"-5\" r=\"1.5\" fill=\"#fefdf9\"></circle><path d=\"M-4.5 -2.5 v5.5 M0.5 -4 v7 M5 -2.5 v4.5\" stroke=\"#141310\" stroke-width=\"1.9\" stroke-linecap=\"round\"></path></g>\n<g id=\"mic\"><rect x=\"-4\" y=\"0\" width=\"8\" height=\"34\" rx=\"3\" fill=\"#141310\"></rect><rect x=\"-5\" y=\"6\" width=\"10\" height=\"4\" fill=\"#e0a526\"></rect><circle cx=\"0\" cy=\"-6\" r=\"9\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2.5\"></circle><path d=\"M-6 -6 h12 M0 -13 v14\" stroke=\"#9a6e10\" stroke-width=\"1.5\"></path></g>\n<path id=\"gs\" d=\"M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z\"></path>\n<path id=\"sp\" d=\"M0 -8 C1 -2 2 -1 8 0 C2 1 1 2 0 8 C-1 2 -2 1 -8 0 C-2 -1 -1 -2 0 -8 Z\"></path><g id=\"p-guitar\"><path d=\"M-30 -14 C-36 -24 -52 -22 -56 -14 C-70 -16 -78 -2 -72 8 C-68 18 -52 20 -44 14 C-36 18 -28 14 -28 6 C-24 2 -24 -6 -30 -14 Z\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><path d=\"M-36 -2 C-38 6 -46 10 -54 6 C-50 0 -44 -4 -36 -2 Z\" fill=\"#e0a526\"></path><rect x=\"-52\" y=\"-8\" width=\"4\" height=\"15\" fill=\"#141310\"></rect><rect x=\"-34\" y=\"-3.5\" width=\"62\" height=\"7\" rx=\"2\" fill=\"#7a4a22\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><path d=\"M-20 -3.5 v7 M-8 -3.5 v7 M4 -3.5 v7 M16 -3.5 v7\" stroke=\"#e0a526\" stroke-width=\"1.2\"></path><path d=\"M26 -6 L40 -9 L42 8 L26 5 Z\" fill=\"#141310\"></path><circle cx=\"32\" cy=\"-9.5\" r=\"2\" fill=\"#e0a526\"></circle><circle cx=\"38\" cy=\"-10.5\" r=\"2\" fill=\"#e0a526\"></circle><circle cx=\"32\" cy=\"8.5\" r=\"2\" fill=\"#e0a526\"></circle><circle cx=\"38\" cy=\"9.5\" r=\"2\" fill=\"#e0a526\"></circle><path d=\"M-64 -1.5 H32 M-64 1.5 H32\" stroke=\"#fefdf9\" stroke-width=\".8\"></path></g><g id=\"p-drum\"><path d=\"M-14 30 L-24 56 M14 30 L24 56 M0 31 L0 56\" stroke=\"#141310\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M-26 0 L-26 26 C-26 32 26 32 26 26 L26 0 Z\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><path d=\"M-23 5 L-15 23 L-8 5 L0 23 L8 5 L15 23 L23 5\" fill=\"none\" stroke=\"#e0a526\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><ellipse cx=\"0\" cy=\"0\" rx=\"26\" ry=\"7\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></ellipse></g><g id=\"p-stick\"><path d=\"M0 8 L0 -34\" stroke=\"#141310\" stroke-width=\"6.5\" stroke-linecap=\"round\"></path><path d=\"M0 8 L0 -34\" stroke=\"#d9a866\" stroke-width=\"3.5\" stroke-linecap=\"round\"></path><circle cx=\"0\" cy=\"-36\" r=\"3.6\" fill=\"#d9a866\" stroke=\"#141310\" stroke-width=\"1.8\" stroke-linejoin=\"round\"></circle></g><g id=\"p-keys\"><path d=\"M-30 16 L30 56 M30 16 L-30 56\" stroke=\"#141310\" stroke-width=\"3\" stroke-linecap=\"round\"></path><rect x=\"-44\" y=\"-6\" width=\"88\" height=\"22\" rx=\"3\" fill=\"#141310\"></rect><rect x=\"-40\" y=\"0\" width=\"80\" height=\"13\" fill=\"#fefdf9\"></rect><path d=\"M-30 0 v13 M-20 0 v13 M-10 0 v13 M0 0 v13 M10 0 v13 M20 0 v13 M30 0 v13\" stroke=\"#141310\" stroke-width=\"1.2\"></path><g fill=\"#141310\"><rect x=\"-33\" y=\"0\" width=\"6\" height=\"8\"></rect><rect x=\"-23\" y=\"0\" width=\"6\" height=\"8\"></rect><rect x=\"-3\" y=\"0\" width=\"6\" height=\"8\"></rect><rect x=\"7\" y=\"0\" width=\"6\" height=\"8\"></rect><rect x=\"17\" y=\"0\" width=\"6\" height=\"8\"></rect></g><circle cx=\"-36\" cy=\"-2.5\" r=\"1.6\" fill=\"#e0a526\"></circle><circle cx=\"-31\" cy=\"-2.5\" r=\"1.6\" fill=\"#86cffc\"></circle><rect x=\"20\" y=\"-4\" width=\"16\" height=\"3\" rx=\"1\" fill=\"#e0a526\"></rect></g><g id=\"p-cash\"><rect x=\"-15\" y=\"-8\" width=\"30\" height=\"16\" rx=\"2\" fill=\"#5aa05e\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><rect x=\"-11\" y=\"-5\" width=\"22\" height=\"10\" fill=\"none\" stroke=\"#d7efc9\" stroke-width=\"1.2\"></rect><circle r=\"4.2\" fill=\"#d7efc9\"></circle><path d=\"M1.6 -2.4 C0 -3.4 -2 -3 -2 -1.5 C-2 0.4 2 0 2 1.9 C2 3.5 -0.6 3.7 -2 2.6 M0 -4.4 v8.8\" fill=\"none\" stroke=\"#141310\" stroke-width=\"1.1\"></path></g><g id=\"p-moneybag\"><path d=\"M-6 2 C-24 10 -26 40 0 42 C26 40 24 10 6 2 Z\" fill=\"#cfae6e\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><path d=\"M-6 0 L-12 -8 M6 0 L12 -8\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\"></path><path d=\"M-7 1 h14\" stroke=\"#e0a526\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M5 16 C2 13 -5 14 -5 18 C-5 23 5 21 5 27 C5 32 -3 32 -6 29 M0 11 v24\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\"></path></g><g id=\"p-lightstick\"><ellipse cx=\"0\" cy=\"-24\" rx=\"11\" ry=\"24\" fill=\"#86cffc\" opacity=\".35\"></ellipse><rect x=\"-5\" y=\"-44\" width=\"10\" height=\"40\" rx=\"5\" fill=\"#bfe8ff\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><rect x=\"-2\" y=\"-40\" width=\"4\" height=\"31\" rx=\"2\" fill=\"#fefdf9\"></rect><rect x=\"-4\" y=\"-6\" width=\"8\" height=\"20\" rx=\"2\" fill=\"#141310\"></rect><rect x=\"-5\" y=\"-6\" width=\"10\" height=\"3\" fill=\"#e0a526\"></rect></g><g id=\"p-leek\"><path d=\"M-4 -24 C-12 -40 -10 -52 -14 -60 L-6 -58 C-6 -48 -2 -38 0 -26 Z\" fill=\"#5aa05e\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><path d=\"M0 -26 C4 -40 10 -50 16 -58 L20 -52 C12 -44 8 -36 4 -24 Z\" fill=\"#5aa05e\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><rect x=\"-4.5\" y=\"-27\" width=\"9\" height=\"32\" rx=\"3\" fill=\"#eaf5d2\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><path d=\"M-4.5 4 L-4.5 12 C-4.5 17 4.5 17 4.5 12 L4.5 4 Z\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><path d=\"M-2 17 v3 M0 17 v4 M2 17 v3\" stroke=\"#141310\" stroke-width=\"1.2\"></path></g><g id=\"p-pear\"><path d=\"M0 -16 C-6 -16 -7 -8 -8 -4 C-16 0 -16 18 0 18 C16 18 16 0 8 -4 C7 -8 6 -16 0 -16 Z\" fill=\"#c6d64a\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><path d=\"M0 -16 C1 -20 2 -22 4 -24\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\"></path><path d=\"M2 -20 C8 -26 14 -24 14 -20 C10 -18 6 -18 2 -20 Z\" fill=\"#5aa05e\" stroke=\"#141310\" stroke-width=\"1.5\" stroke-linejoin=\"round\"></path><ellipse cx=\"-6\" cy=\"5\" rx=\"2.2\" ry=\"4.5\" fill=\"#fefdf9\" opacity=\".7\"></ellipse></g><g id=\"p-baguette\"><rect x=\"-30\" y=\"-7\" width=\"60\" height=\"14\" rx=\"7\" fill=\"#d79a4a\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></rect><path d=\"M-19 -5 L-13 5 M-7 -5 L-1 5 M5 -5 L11 5 M17 -5 L22 3\" stroke=\"#f3d7a6\" stroke-width=\"2.2\" stroke-linecap=\"round\"></path></g><g id=\"p-boombox\"><path d=\"M-20 -16 C-20 -28 20 -28 20 -16\" fill=\"none\" stroke=\"#141310\" stroke-width=\"4\" stroke-linecap=\"round\"></path><rect x=\"-32\" y=\"-16\" width=\"64\" height=\"34\" rx=\"5\" fill=\"#141310\"></rect><circle cx=\"-17\" cy=\"4\" r=\"10\" fill=\"#3d4f8a\" stroke=\"#e0a526\" stroke-width=\"2\"></circle><circle cx=\"-17\" cy=\"4\" r=\"3.8\" fill=\"#141310\"></circle><circle cx=\"17\" cy=\"4\" r=\"10\" fill=\"#3d4f8a\" stroke=\"#e0a526\" stroke-width=\"2\"></circle><circle cx=\"17\" cy=\"4\" r=\"3.8\" fill=\"#141310\"></circle><rect x=\"-7\" y=\"-11\" width=\"14\" height=\"8\" rx=\"1\" fill=\"#86cffc\"></rect><rect x=\"-26\" y=\"-14\" width=\"5\" height=\"2.5\" fill=\"#e0a526\"></rect><rect x=\"21\" y=\"-14\" width=\"5\" height=\"2.5\" fill=\"#e0a526\"></rect></g><g id=\"p-note\"><ellipse rx=\"6\" ry=\"4.5\" transform=\"rotate(-20)\" fill=\"#141310\"></ellipse><path d=\"M5 -1 v-22 l9 5\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></g><g id=\"p-trophy\"><path d=\"M-16 -32 C-27 -32 -27 -17 -12 -15 M16 -32 C27 -32 27 -17 12 -15\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\"></path><path d=\"M-16 -36 L16 -36 C16 -18 8 -10 0 -10 C-8 -10 -16 -18 -16 -36 Z\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><rect x=\"-3\" y=\"-11\" width=\"6\" height=\"13\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><rect x=\"-12\" y=\"2\" width=\"24\" height=\"7\" rx=\"1.5\" fill=\"#141310\"></rect><use href=\"#gs\" fill=\"#fefdf9\" transform=\"translate(0 -25) scale(.8)\"></use></g><g id=\"p-whistle\"><path d=\"M-16 -6 L2 -6 L2 2 L-16 2 Z\" fill=\"#cfd3d8\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></path><circle cx=\"5\" cy=\"0\" r=\"8\" fill=\"#cfd3d8\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></circle><circle cx=\"6\" cy=\"1\" r=\"2.5\" fill=\"#141310\"></circle><path d=\"M12 -6 C18 -14 24 -10 26 -4\" fill=\"none\" stroke=\"#c3311f\" stroke-width=\"2\"></path></g><g id=\"p-card\"><rect x=\"-7\" y=\"-10\" width=\"14\" height=\"20\" rx=\"2\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><path d=\"M-3.5 -6.5 L2 -6.5\" stroke=\"#fefdf9\" stroke-width=\"1.5\" stroke-linecap=\"round\" opacity=\".7\"></path></g><g id=\"p-micstand\"><ellipse cx=\"0\" cy=\"0\" rx=\"16\" ry=\"4\" fill=\"#141310\"></ellipse><path d=\"M0 0 L0 -110 L18 -121\" fill=\"none\" stroke=\"#141310\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><circle cx=\"22\" cy=\"-125\" r=\"7.5\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></circle><path d=\"M17 -125 h10 M22 -131 v12\" stroke=\"#9a6e10\" stroke-width=\"1.3\"></path></g><g id=\"p-trumpet\"><path d=\"M-14 3 C-14 14 10 14 10 3\" fill=\"none\" stroke=\"#141310\" stroke-width=\"6.5\"></path><path d=\"M-14 3 C-14 14 10 14 10 3\" fill=\"none\" stroke=\"#e0a526\" stroke-width=\"3.5\"></path><rect x=\"-32\" y=\"-3\" width=\"54\" height=\"6\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></rect><path d=\"M20 -3 L40 -14 L40 14 L20 3 Z\" fill=\"#e0a526\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></path><ellipse cx=\"40\" cy=\"0\" rx=\"3\" ry=\"14\" fill=\"#b8861b\" stroke=\"#141310\" stroke-width=\"2\" stroke-linejoin=\"round\"></ellipse><rect x=\"-7\" y=\"-12\" width=\"3.5\" height=\"9\" fill=\"#141310\"></rect><rect x=\"-1.75\" y=\"-12\" width=\"3.5\" height=\"9\" fill=\"#141310\"></rect><rect x=\"3.5\" y=\"-12\" width=\"3.5\" height=\"9\" fill=\"#141310\"></rect><rect x=\"-38\" y=\"-2.5\" width=\"6\" height=\"5\" rx=\"1\" fill=\"#141310\"></rect></g>",
  "motions": [
   "none",
   "bob",
@@ -70,7 +70,7 @@
     "id": "pick4-drumroll",
     "added": "2026-11-24",
     "motion": "shake",
-    "svg": "<use href=\"#pud\"></use><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\" translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 126 L85 115 L96 126 M104 126 L115 115 L126 126\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><rect x=\"82\" y=\"154\" width=\"36\" height=\"15\" rx=\"6\" fill=\"#fefdf9\"></rect><path d=\"M91 154 v15 M100 154 v15 M109 154 v15\" stroke=\"#141310\" stroke-width=\"1.5\"></path></g><path d=\"M132 132 C150 120 156 92 150 64\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C150 120 156 92 150 64\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#mic\" x=\"150\" y=\"30\"></use><use href=\"#gl\" x=\"150\" y=\"60\"></use><path d=\"M68 132 C52 140 46 124 50 108\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C52 140 46 124 50 108\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"50\" y=\"104\"></use><path d=\"M48 166 l-9 -3 M48 178 l-9 3 M152 166 l9 -3 M152 178 l9 3\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>"
+    "svg": "<use href=\"#pud\"></use><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(-4 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 126 L85 115 L96 126 M104 126 L115 115 L126 126\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><rect x=\"82\" y=\"154\" width=\"36\" height=\"15\" rx=\"6\" fill=\"#fefdf9\"></rect><path d=\"M91 154 v15 M100 154 v15 M109 154 v15\" stroke=\"#141310\" stroke-width=\"1.5\"></path></g><use href=\"#p-drum\" transform=\"translate(100 214) rotate(0) scale(1)\"></use><path d=\"M68 132 C56 146 60 162 72 170\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C56 146 60 162 72 170\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-stick\" transform=\"translate(74 172) rotate(157) scale(1)\"></use><use href=\"#gl\" x=\"74\" y=\"172\"></use><path d=\"M132 132 C144 146 140 162 128 170\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C144 146 140 162 128 170\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-stick\" transform=\"translate(126 172) rotate(-157) scale(1)\"></use><use href=\"#gl\" x=\"126\" y=\"172\"></use><path d=\"M80 200 l-8 -3 M120 200 l8 -3 M86 192 l-6 -6 M114 192 l6 -6\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M40 150 l-9 -3 M40 162 l-9 3 M160 150 l9 -3 M160 162 l9 3\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>"
    }
   ],
   "correct": [
@@ -308,6 +308,44 @@
      "ms": 950
     }
    ]
+  },
+  {
+   "id": "one-man-band",
+   "name": "One man band",
+   "added": "2026-11-24",
+   "nod": "world: Vocaloid live concert",
+   "steps": [
+    {
+     "svg": "<use href=\"#pud\"></use><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(-8 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 122 C78 130 92 130 96 122 M104 122 C108 130 122 130 126 122\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gb\"></use></g><use href=\"#p-guitar\" transform=\"translate(150 138) rotate(-24) scale(1.15)\"></use><path d=\"M68 132 C60 156 84 168 104 160\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C60 156 84 168 104 160\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"106\" y=\"160\"></use><path d=\"M132 132 C142 140 148 140 150 138\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C142 140 148 140 150 138\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"151\" y=\"138\"></use><use href=\"#p-note\" transform=\"translate(30 70) rotate(0) scale(1.1)\"></use><use href=\"#p-note\" transform=\"translate(50 38) rotate(0) scale(0.9)\"></use><path d=\"M98 178 l-4 8 M108 180 l2 9\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>",
+     "motion": "sway",
+     "ms": 500
+    },
+    {
+     "svg": "<use href=\"#pud\"></use><g transform=\"translate(100 284) scale(0.95 1.05) translate(-100 -284)\"><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(10 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><use href=\"#ey\"></use><use href=\"#gs\" fill=\"#e0a526\" transform=\"translate(85 123) scale(2)\"></use><use href=\"#gs\" fill=\"#e0a526\" transform=\"translate(115 123) scale(2)\"></use><use href=\"#gb\"></use></g><use href=\"#p-guitar\" transform=\"translate(162 74) rotate(-78) scale(1.15)\"></use><path d=\"M132 132 C150 122 158 96 162 76\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C150 122 158 96 162 76\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"162\" y=\"74\"></use><path d=\"M68 132 C78 156 124 160 146 146\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C78 156 124 160 146 146\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"148\" y=\"144\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(40 40) scale(1)\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(180 140) scale(0.8)\"></use><path d=\"M24 100 l-8 -4 M24 112 h-9\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></g>",
+     "motion": "bounce",
+     "ms": 500
+    },
+    {
+     "svg": "<use href=\"#pud\"></use><g transform=\"translate(100 284) scale(1.04 0.95) translate(-100 -284)\"><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(6 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 126 L85 115 L96 126 M104 126 L115 115 L126 126\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><rect x=\"82\" y=\"154\" width=\"36\" height=\"15\" rx=\"6\" fill=\"#fefdf9\"></rect><path d=\"M91 154 v15 M100 154 v15 M109 154 v15\" stroke=\"#141310\" stroke-width=\"1.5\"></path></g><use href=\"#p-drum\" transform=\"translate(100 214) rotate(0) scale(1)\"></use><path d=\"M68 132 C50 120 44 100 48 80\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C50 120 44 100 48 80\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-stick\" transform=\"translate(48 78) rotate(-20) scale(1)\"></use><use href=\"#gl\" x=\"48\" y=\"80\"></use><path d=\"M132 132 C146 152 138 176 120 186\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C146 152 138 176 120 186\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-stick\" transform=\"translate(118 188) rotate(-48) scale(1)\"></use><use href=\"#gl\" x=\"120\" y=\"188\"></use><path d=\"M106 192 l6 -6 M118 196 l8 -2\" fill=\"none\" stroke=\"#141310\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></g>",
+     "motion": "shake",
+     "ms": 450
+    },
+    {
+     "svg": "<use href=\"#pud\"></use><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(-10 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><use href=\"#ey\"></use><circle cx=\"85\" cy=\"132\" r=\"6\" fill=\"#141310\"></circle><circle cx=\"115\" cy=\"132\" r=\"6\" fill=\"#141310\"></circle><path d=\"M74 104 C80 98 90 98 96 104 M104 104 C110 98 120 98 126 104\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gr\"></use></g><use href=\"#p-keys\" transform=\"translate(100 190) rotate(0) scale(1)\"></use><path d=\"M68 132 C58 152 62 176 78 190\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C58 152 62 176 78 190\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"80\" y=\"192\"></use><path d=\"M132 132 C142 152 136 176 112 190\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C142 152 136 176 112 190\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"110\" y=\"192\"></use><use href=\"#p-note\" transform=\"translate(150 96) rotate(0) scale(1)\"></use><use href=\"#p-note\" transform=\"translate(170 60) rotate(0) scale(0.9)\"></use><use href=\"#p-note\" transform=\"translate(34 90) rotate(0) scale(0.8)\"></use>",
+     "motion": "bob",
+     "ms": 550
+    },
+    {
+     "svg": "<use href=\"#pud\"></use><g transform=\"translate(100 284) scale(0.96 1.04) translate(-100 -284)\"><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\" translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 124 C78 112 92 112 96 124 M104 124 C108 112 122 112 126 124\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gb\"></use></g><path d=\"M68 132 C50 108 44 80 50 56\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C50 108 44 80 50 56\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-lightstick\" transform=\"translate(50 54) rotate(-14) scale(1)\"></use><use href=\"#gl\" x=\"50\" y=\"56\"></use><path d=\"M132 132 C150 108 156 80 150 56\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C150 108 156 80 150 56\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#p-lightstick\" transform=\"translate(150 54) rotate(14) scale(1)\"></use><use href=\"#gl\" x=\"150\" y=\"56\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(100 -12) scale(0.9)\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(20 120) scale(0.7)\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(180 120) scale(0.7)\"></use></g>",
+     "motion": "pulse",
+     "ms": 600
+    },
+    {
+     "svg": "<use href=\"#pud\"></use><g transform=\"translate(100 284) scale(0.96 1.04) translate(-100 -284)\"><use href=\"#legs\"></use><use href=\"#torso\"></use><g transform=\"rotate(8 100 118) translate(100 78) scale(0.615) translate(-100 -135)\"><use href=\"#hd\"></use><path d=\"M74 122 C78 130 92 130 96 122 M104 122 C108 130 122 130 126 122\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M74 102 C80 96 90 96 96 102 M104 102 C110 96 120 96 126 102\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M62 150 C58 164 66 176 80 176 M138 150 C142 164 134 176 120 176\" fill=\"none\" stroke=\"#fefdf9\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><circle cx=\"100\" cy=\"168\" r=\"6\" fill=\"#fefdf9\"></circle></g><use href=\"#p-trumpet\" transform=\"translate(132.5 78) rotate(-35) scale(1)\"></use><path d=\"M68 132 C72 108 100 92 118 88\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M68 132 C72 108 100 92 118 88\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"119\" y=\"87\"></use><path d=\"M132 132 C150 120 148 92 134 80\" fill=\"none\" stroke=\"#141310\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M132 132 C150 120 148 92 134 80\" fill=\"none\" stroke=\"#22306b\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><use href=\"#gl\" x=\"133\" y=\"78\"></use><use href=\"#p-note\" transform=\"translate(176 24) rotate(0) scale(1.1)\"></use><use href=\"#p-note\" transform=\"translate(150 6) rotate(0) scale(0.9)\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(40 40) scale(0.8)\"></use><use href=\"#sp\" fill=\"#e0a526\" transform=\"translate(186 80) scale(0.7)\"></use></g>",
+     "motion": "stretch",
+     "ms": 800
+    }
+   ]
   }
  ],
  "designNotes": [
@@ -370,7 +408,201 @@
    "layer": {
     "torso": "<path d=\"M112 150 L108 170 L113 166 L116 171 Z M120 150 L124 170 L119 166 L116 171 Z\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"1.5\" stroke-linejoin=\"round\"></path><circle cx=\"116\" cy=\"146\" r=\"9\" fill=\"#1f3a93\" stroke=\"#141310\" stroke-width=\"2\"></circle><circle cx=\"116\" cy=\"146\" r=\"6\" fill=\"#fefdf9\"></circle><circle cx=\"116\" cy=\"146\" r=\"3.5\" fill=\"#c3311f\"></circle>"
    }
+  },
+  "christmas": {
+   "for": "Christmas (Dec 24 and 25)",
+   "layer": {
+    "hd": "<g transform=\"translate(84 60) rotate(-32)\"><path d=\"M-19 -2 C-16 -36 6 -58 34 -44 C24 -40 14 -30 17 -2 Z\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"3.5\" stroke-linejoin=\"round\"></path><rect x=\"-23\" y=\"-8\" width=\"46\" height=\"13\" rx=\"6.5\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"3\"></rect><circle cx=\"36\" cy=\"-43\" r=\"8\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"3\"></circle></g>"
+   }
+  },
+  "easter": {
+   "for": "Easter Sunday (Western date)",
+   "layer": {
+    "hd": "<g transform=\"translate(78 64) rotate(-34)\"><ellipse cx=\"0\" cy=\"-26\" rx=\"10\" ry=\"27\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"3.5\"></ellipse><ellipse cx=\"0\" cy=\"-26\" rx=\"4.5\" ry=\"18\" fill=\"#f2a7b5\"></ellipse></g><g transform=\"translate(94 50) rotate(-8)\"><ellipse cx=\"0\" cy=\"-24\" rx=\"10\" ry=\"26\" fill=\"#fefdf9\" stroke=\"#141310\" stroke-width=\"3.5\"></ellipse><ellipse cx=\"0\" cy=\"-24\" rx=\"4.5\" ry=\"17\" fill=\"#f2a7b5\"></ellipse></g><path d=\"M66 84 C74 62 92 46 104 44\" fill=\"none\" stroke=\"#f2a7b5\" stroke-width=\"5\" stroke-linecap=\"round\"></path>"
+   }
+  },
+  "valentines": {
+   "for": "Valentine's Day (Feb 14)",
+   "layer": {
+    "torso": "<path d=\"M123 160 C122 152 122 146 124 140\" fill=\"none\" stroke=\"#141310\" stroke-width=\"4\" stroke-linecap=\"round\"></path><path d=\"M123 160 C122 152 122 146 124 140\" fill=\"none\" stroke=\"#5aa05e\" stroke-width=\"2\" stroke-linecap=\"round\"></path><path d=\"M123 150 C129 146 132 150 128 153 Z\" fill=\"#5aa05e\" stroke=\"#141310\" stroke-width=\"1.2\"></path><circle cx=\"124\" cy=\"136\" r=\"7\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"2\"></circle><path d=\"M121 135 C123 131 128 133 126 137 C125 139 122 139 122 136\" fill=\"none\" stroke=\"#8f1d21\" stroke-width=\"1.5\"></path><path d=\"M84 152 C80 147 84 143 87 146 C90 143 94 147 90 152 L87 155 Z\" fill=\"#c3311f\" stroke=\"#141310\" stroke-width=\"1.5\"></path>"
+   }
   }
  },
- "outfitNow": "suit"
+ "outfitNow": "suit",
+ "props": [
+  {
+   "id": "p-guitar",
+   "name": "Electric guitar",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) is the fretting hand on the neck; the body is centered near (-50,0), strum there; about 120 x 40; rotate to tilt",
+   "tags": [
+    "music",
+    "band",
+    "idol"
+   ]
+  },
+  {
+   "id": "p-drum",
+   "name": "Snare drum on a stand",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the center of the top drumhead; the stand legs reach y 56; about 56 x 62",
+   "tags": [
+    "music",
+    "band"
+   ]
+  },
+  {
+   "id": "p-stick",
+   "name": "Drumstick",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0); the tip points up to (0,-36); rotate to aim it",
+   "tags": [
+    "music",
+    "band"
+   ]
+  },
+  {
+   "id": "p-keys",
+   "name": "Keyboard on a stand",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the middle of the keyboard top edge; hands go on the keys around y 6; about 88 x 62",
+   "tags": [
+    "music",
+    "band",
+    "vocaloid"
+   ]
+  },
+  {
+   "id": "p-cash",
+   "name": "Banknote",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the center; about 30 x 16; scatter and rotate several for a money rain",
+   "tags": [
+    "money",
+    "win"
+   ]
+  },
+  {
+   "id": "p-moneybag",
+   "name": "Money bag",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) is the tied neck; the bag hangs down to y 42; about 52 x 50",
+   "tags": [
+    "money",
+    "win"
+   ]
+  },
+  {
+   "id": "p-lightstick",
+   "name": "Concert light stick",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) is the handle; the glowing tube reaches up to y -44; for idol and Vocaloid concert moments",
+   "tags": [
+    "music",
+    "idol",
+    "vocaloid"
+   ]
+  },
+  {
+   "id": "p-leek",
+   "name": "Green onion",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) near the white end; the leaves reach up to y -60; a classic Vocaloid fan prop to twirl",
+   "tags": [
+    "vocaloid",
+    "meme",
+    "food"
+   ]
+  },
+  {
+   "id": "p-pear",
+   "name": "Pear",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the middle of the pear; about 32 x 42; for the Teto pear meme and fruit gags",
+   "tags": [
+    "meme",
+    "vocaloid",
+    "food"
+   ]
+  },
+  {
+   "id": "p-baguette",
+   "name": "Baguette",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the middle; about 60 x 14; hold it at the middle or one end",
+   "tags": [
+    "meme",
+    "vocaloid",
+    "food"
+   ]
+  },
+  {
+   "id": "p-boombox",
+   "name": "Boombox",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the center; the handle top is at y -26; about 64 x 46; carry by the handle at (0,-24)",
+   "tags": [
+    "music",
+    "dance"
+   ]
+  },
+  {
+   "id": "p-note",
+   "name": "Music note",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the note head; the flag reaches to (14,-22); scatter around for music",
+   "tags": [
+    "music"
+   ]
+  },
+  {
+   "id": "p-trophy",
+   "name": "Gold trophy",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) is the stem; the cup rim is at y -36 and the base at y 9; about 52 x 46",
+   "tags": [
+    "win"
+   ]
+  },
+  {
+   "id": "p-whistle",
+   "name": "Referee whistle",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0); the mouthpiece points left to x -16; about 32 x 16",
+   "tags": [
+    "referee",
+    "sport"
+   ]
+  },
+  {
+   "id": "p-card",
+   "name": "Referee card",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the center; about 14 x 20; set its color with fill on the use, e.g. fill=\"#e0a526\" (yellow) or fill=\"#c3311f\" (red)",
+   "tags": [
+    "referee",
+    "sport"
+   ]
+  },
+  {
+   "id": "p-micstand",
+   "name": "Retro mic stand",
+   "added": "2026-11-24",
+   "anchor": "(0,0) is the base on the ground line (place at y 284); the pole rises to y -110 and the mic head sits at (22,-125)",
+   "tags": [
+    "music",
+    "idol"
+   ]
+  },
+  {
+   "id": "p-trumpet",
+   "name": "Trumpet",
+   "added": "2026-11-24",
+   "anchor": "grip (0,0) is on the valves; the bell opens to the right at x 40 and the mouthpiece is at x -36; about 80 x 30",
+   "tags": [
+    "music",
+    "showbiz"
+   ]
+  }
+ ]
 }
