@@ -88,7 +88,7 @@ nav{display:flex;align-items:center;gap:2px}
 @keyframes coinr{to{transform:rotate(16deg) scale(1.08)}}
 .coin.flip{animation:cflip .9s ease-in-out}
 @keyframes cflip{0%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(900deg) translateY(-28px)}100%{transform:rotateY(1800deg) translateY(0)}}
-.nah{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:20;font:400 clamp(110px,36vw,230px)/1 "Permanent Marker",Impact,sans-serif;color:#e3271a;-webkit-text-stroke:5px #141310;paint-order:stroke fill;text-shadow:7px 7px 0 #141310;letter-spacing:-.02em;rotate:-9deg;opacity:0}
+.nah{position:fixed;inset:0;display:grid;place-items:center;place-content:center;padding:0 3vw;text-align:center;pointer-events:none;z-index:20;font:400 clamp(110px,36vw,230px)/.95 "Permanent Marker",Impact,sans-serif;color:#e3271a;-webkit-text-stroke:.035em #141310;paint-order:stroke fill;text-shadow:.045em .045em 0 #141310;letter-spacing:-.02em;rotate:-9deg;opacity:0;overflow-wrap:normal}
 .nah.on{animation:nah 1.7s cubic-bezier(.2,.9,.3,1) forwards}
 @keyframes nah{0%{opacity:0;transform:scale(3.2) rotate(-18deg)}10%{opacity:1;transform:scale(.88) rotate(-4deg)}15%{transform:scale(1.08) rotate(2deg)}20%{transform:translate(-8px,4px)}25%{transform:translate(8px,-5px)}30%{transform:translate(-6px,-3px)}35%{transform:translate(5px,5px)}40%{transform:translate(0,0)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
 .jolt{animation:jolt .45s linear}
@@ -440,7 +440,10 @@ async function useHint(){
   if(!reduce){c.classList.add("flip");await sleep(900);c.classList.remove("flip");}
   if(Math.random()<.5){
     s.near=null;s.nearSel=null;s.cheat=true;save();
-    const n=$("#nah"),mn=document.querySelector("main");n.textContent="NAH";n.classList.remove("on");mn.classList.remove("jolt");void n.offsetWidth;n.classList.add("on");
+    const n=$("#nah"),mn=document.querySelector("main");
+    const pool=BL&&Array.isArray(BL.nahs)&&BL.nahs.length?BL.nahs.map((t,i)=>({id:String(i),t:String(t)})):[{id:"0",t:"NAH"}];
+    const pk=pickV(pool,"nah")||pool[0],lw=Math.max(3,...pk.t.split(/\s+/).map(w=>w.length));
+    n.style.fontSize=`min(230px,${Math.min(36,92/(lw*.68)).toFixed(1)}vw)`;n.textContent=pk.t;n.classList.remove("on");mn.classList.remove("jolt");void n.offsetWidth;n.classList.add("on");
     setTimeout(()=>mn.classList.add("jolt"),170);
     setTimeout(()=>{n.classList.remove("on");n.textContent="";mn.classList.remove("jolt");},1700);
     busy=false;emote("cheat");updBtns();return;
