@@ -351,7 +351,7 @@ async function submit(){
 
 
 // ---------- Blurbo
-let BL=null,blT=0,blDance=0,blIdle=0,blClip=0;const blLast={};
+let BL=null,blT=0,blDance=0,blIdle=0,blClip=0,blSoft=false;const blLast={};
 async function loadBl(){
   try{const r=await fetch("blurbo.json",{cache:"no-store"});if(!r.ok)throw 0;BL=await r.json();$("#bldefs").innerHTML=BL.defs||"";}
   catch(e){BL=null;$("#stage").hidden=true;}
@@ -370,7 +370,8 @@ function blShow(svg,motion,calm){
 const CALM=new Set(["idle","pick1","pick2","pick3","pick4","look","cheat"]);
 function stopDance(){clearTimeout(blDance);blDance=0;}
 function emote(key,hold){
-  if(!BL||!BL.emotes||blOff||blClip)return;
+  if(!BL||!BL.emotes||blOff)return;
+  if(blClip){if(!blSoft)return;clearTimeout(blClip);blClip=0;blSoft=false;}
   stopDance();clearTimeout(blT);
   const v=pickV(BL.emotes[key],key)||pickV(BL.emotes.idle,"idle");
   if(!v)return;
@@ -386,7 +387,8 @@ function rest(){
   emote(["idle","pick1","pick2","pick3","pick4"][sel.length]||"idle");
 }
 function dance(loops){
-  if(!BL||!BL.dances||!BL.dances.length||blOff||blClip)return;
+  if(!BL||!BL.dances||!BL.dances.length||blOff)return;
+  if(blClip){if(!blSoft)return;clearTimeout(blClip);blClip=0;blSoft=false;}
   stopDance();clearTimeout(blT);
   let d=pickV(BL.dances,"dance"),i=0;
   const step=()=>{
@@ -398,12 +400,12 @@ function dance(loops){
   };
   step();
 }
-function playClip(c,done){
-  clearTimeout(blClip);blClip=0;stopDance();clearTimeout(blT);
+function playClip(c,done,soft){
+  clearTimeout(blClip);blClip=0;blSoft=!!soft;stopDance();clearTimeout(blT);
   if(!c||!c.steps||!c.steps.length){done&&done();return;}
   let i=0;
   const step=()=>{
-    if(i>=c.steps.length){blClip=0;done&&done();return;}
+    if(i>=c.steps.length){blClip=0;blSoft=false;done&&done();return;}
     const f=c.steps[i++];blShow(f.svg,f.motion);
     blClip=setTimeout(step,Math.max(150,f.ms||400));
   };
@@ -436,7 +438,16 @@ function tick(){
 }
 function poke(){
   clearTimeout(blIdle);
-  blIdle=setTimeout(()=>{if(BL&&!busy&&P.length&&!st().done&&!looking&&!sel.length)emote("escape",3200);poke();},45000);
+  blIdle=setTimeout(()=>{
+    const s=P.length&&st();
+    if(BL&&s&&!busy&&!s.done&&!s.cheat&&!looking&&!sel.length&&!blOff&&!blClip&&!blDance){
+      const r=Math.random(),w=BL.waits&&BL.waits.length?pickV(BL.waits,"wait"):null;
+      if(r<.35)emote("escape",3200);
+      else if(r<.7&&w)playClip(w,()=>rest(),true);
+      else dance(1);
+    }
+    poke();
+  },25000+Math.random()*15000);
 }
 
 function showNah(){
