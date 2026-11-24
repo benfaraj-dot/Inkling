@@ -116,6 +116,15 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .stage::after{content:"";position:absolute;left:0;right:0;top:115px;height:2.5px;border-radius:2px;background:var(--ink)}
 #bl{position:absolute;right:2px;top:0;width:76px;height:128px;overflow:visible;z-index:1;--glow:light-dark(transparent,rgba(248,244,234,.24));background:radial-gradient(ellipse 62% 48% at 50% 52%,var(--glow),transparent 72%)}
 #blmv{transform-box:view-box;transform-origin:100px 284px}
+.gun{position:absolute;left:0;top:66px;min-width:44px;height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 4px;border:0;border-radius:10px;background:none;color:var(--ink);font:700 22px/1 Caveat,cursive;cursor:pointer;z-index:2}
+.gun:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.gun:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.gun svg{width:42px;height:30px}
+.stage.off{height:44px}
+.stage.off::after,.stage.off #bl{display:none}
+.stage.off .gun{top:0}
+.m-gone{animation:bgone .6s ease-in forwards}
+@keyframes bgone{30%{transform:rotate(-14deg) scale(1.05)}100%{transform:scale(1.3,0);opacity:0}}
 .m-bob{animation:bbob .45s ease-in-out infinite alternate}.m-sway{animation:bsway .9s ease-in-out infinite alternate}.m-shake{animation:bshake .12s linear infinite alternate}.m-bounce{animation:bbounce .35s ease-in-out infinite alternate}.m-wiggle{animation:bwig .2s ease-in-out infinite alternate}.m-float{animation:bfloat 1.6s ease-in-out infinite alternate}.m-pulse{animation:bpulse .5s ease-in-out infinite alternate}.m-melt{animation:bmelt 1.2s ease-in-out infinite alternate}.m-stretch{animation:bstretch .8s ease-in-out infinite alternate}.m-spin{animation:bspin .6s ease-in-out infinite}
 @keyframes bbob{to{transform:scale(1.03,.95)}}@keyframes bsway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}@keyframes bshake{from{transform:translateX(-3px)}to{transform:translateX(3px)}}@keyframes bbounce{to{transform:translateY(-8px) scale(.98,1.03)}}@keyframes bwig{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}@keyframes bfloat{to{transform:translateY(-4px)}}@keyframes bpulse{to{transform:scale(1.06)}}@keyframes bmelt{to{transform:scale(1.04,.9)}}@keyframes bstretch{to{transform:scale(.95,1.06)}}@keyframes bspin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
 @media(min-width:600px){main{padding-top:30px}}
@@ -136,7 +145,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="nb" id="nextp" aria-label="Next page">&rsaquo;</button>
   </nav>
 </header>
-<div class="stage" id="stage" aria-hidden="true"><svg id="bl" viewBox="0 -24 200 340"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
+<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><span id="gunL"></span></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
 <p class="sub" id="sub">Make four groups of four.</p>
 
 <div class="board">
@@ -198,7 +207,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sleep=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
 const pad=n=>String(n).padStart(2,"0");
 const now=new Date(),TODAY=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
-let P=[],S={},cur=0,sel=[],busy=false,revealing=false,looking=false,noteT=0,lastDay="";
+let blOff=false,P=[],S={},cur=0,sel=[],busy=false,revealing=false,looking=false,noteT=0,lastDay="";
 
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const rot=w=>{let h=7;for(const c of w)h=(h*31+c.charCodeAt(0))%997;return ((h%25)-12)/10;};
@@ -208,8 +217,8 @@ const st=()=>S[cur]||(S[cur]=fresh(cur));
 const lvl=w=>G().findIndex(g=>g[1].includes(w));
 const fmt=d=>{const[y,m,dd]=d.split("-").map(Number);return `${MON[m-1]} ${dd}`;};
 const label=i=>{const d=P[i].date;return d?(d===TODAY?"today's page":fmt(d)):`page ${P[i].n||i+1}`;};
-const save=()=>{try{localStorage.setItem(K,JSON.stringify({S,cur,lastDay}));}catch(e){}};
-const load=()=>{try{const d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";}}catch(e){}};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify({S,cur,lastDay,blOff}));}catch(e){}};
+const load=()=>{try{const d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;}}catch(e){}};
 const tileOf=w=>document.querySelector(`.tile[data-w="${CSS.escape(w)}"]`);
 
 function note(t){const n=$("#note");n.textContent=t;n.classList.add("on");clearTimeout(noteT);noteT=setTimeout(()=>n.classList.remove("on"),1500);}
@@ -321,7 +330,7 @@ function blShow(svg,motion){
 }
 function stopDance(){clearTimeout(blDance);blDance=0;}
 function emote(key,hold){
-  if(!BL||!BL.emotes)return;
+  if(!BL||!BL.emotes||blOff)return;
   stopDance();clearTimeout(blT);
   const v=pickV(BL.emotes[key],key)||pickV(BL.emotes.idle,"idle");
   if(!v)return;
@@ -329,14 +338,14 @@ function emote(key,hold){
   if(hold)blT=setTimeout(rest,hold);
 }
 function rest(){
-  if(!BL||!P.length)return;
+  if(!BL||!P.length||blOff)return;
   const s=st();
   if(s.done){if(s.won){if(!blDance)dance();}else emote("lose");return;}
   if(looking){emote("look");return;}
   emote(["idle","pick1","pick2","pick3","pick4"][sel.length]||"idle");
 }
 function dance(){
-  if(!BL||!BL.dances||!BL.dances.length)return;
+  if(!BL||!BL.dances||!BL.dances.length||blOff)return;
   stopDance();clearTimeout(blT);
   let d=pickV(BL.dances,"dance"),i=0;
   const step=()=>{
@@ -346,6 +355,16 @@ function dance(){
     blDance=setTimeout(step,Math.max(200,f.ms||500));
   };
   step();
+}
+function setBl(off,anim){
+  blOff=off;const sg=$("#stage");
+  $("#gun").setAttribute("aria-label",off?"Bring Blurbo back":"Remove Blurbo");
+  $("#gunL").textContent=off?"bring him back":"";
+  if(off){
+    stopDance();clearTimeout(blT);
+    if(anim&&!reduce){$("#blmv").setAttribute("class","m-gone");setTimeout(()=>{if(blOff)sg.classList.add("off");},650);}
+    else sg.classList.add("off");
+  }else{sg.classList.remove("off");rest();}
 }
 function poke(){
   clearTimeout(blIdle);
@@ -373,6 +392,7 @@ $("#grid").addEventListener("click",e=>{
   t.setAttribute("aria-pressed",String(i<0));updBtns();rest();poke();
 });
 $("#look").addEventListener("click",()=>{setLook(!looking);});
+$("#gun").addEventListener("click",()=>{const off=!blOff;if(off)note("bang!");setBl(off,true);save();});
 $("#slipX").addEventListener("click",()=>setLook(false));
 $("#sub2").addEventListener("click",submit);
 $("#desel").addEventListener("click",()=>{sel=[];document.querySelectorAll(".tile").forEach(t=>t.setAttribute("aria-pressed","false"));updBtns();rest();poke();});
@@ -400,7 +420,7 @@ function pickStart(){
   else if(t<0&&!S[cur]){const dated=P.map((p,i)=>p.date?i:-1).filter(i=>i>=0);if(dated.length&&lastDay!==TODAY){cur=dated[dated.length-1];lastDay=TODAY;}}
 }
 async function start(d){
-  if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";}else load();
+  if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;}else load();
   try{
     const r=await fetch("puzzles.json",{cache:"no-store"});
     if(!r.ok)throw new Error(r.status);
@@ -411,9 +431,9 @@ async function start(d){
     $("#pg").textContent="";$("#play").hidden=true;return;
   }
   pickStart();save();render();
-  await loadBl();rest();poke();
+  await loadBl();if(BL)setBl(blOff,false);rest();poke();
 }
-window.claude?.hot?.snapshot?.(()=>({S,cur,lastDay}));
+window.claude?.hot?.snapshot?.(()=>({S,cur,lastDay,blOff}));
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 }
 </script>
