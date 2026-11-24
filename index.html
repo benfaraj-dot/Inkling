@@ -118,6 +118,16 @@ nav{display:flex;align-items:center;gap:2px}
 .msg{text-align:center;color:var(--soft);padding:40px 0}
 .tmr{font:700 1.15em/1 Caveat,cursive;color:var(--pen);font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
+.lnk{appearance:none;background:none;border:0;padding:6px 4px;min-height:32px;color:var(--pen);font-family:Kalam,cursive;font-weight:700;font-size:inherit;line-height:1.2;text-decoration:underline wavy color-mix(in srgb,var(--pen) 45%,transparent);text-underline-offset:4px;cursor:pointer}
+.stp{width:min(520px,100%)}
+.sth{font:700 26px/1 Caveat,cursive;margin:6px 0 8px;color:var(--pen)}
+.stg{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
+.stc{border:2px solid color-mix(in srgb,var(--ink) 55%,transparent);border-radius:14px 5px 12px 6px/6px 12px 5px 14px;padding:8px 10px;display:grid;gap:2px}
+.stc b{font:700 34px/1 Caveat,cursive;white-space:nowrap}
+.stc span{font-size:14px;color:var(--soft);line-height:1.2}
+.dist{display:grid;gap:6px}
+.drow{display:grid;grid-template-columns:7.5em minmax(0,1fr);align-items:center;gap:8px;font-size:15px}
+.dbar{height:22px;border-radius:3px 9px 4px 8px;min-width:26px;display:flex;align-items:center;justify-content:flex-end;padding:0 7px;color:#121110;font-weight:700;font-size:14px}
 .sheet{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(3px)}
 .panel{width:min(460px,100%);max-height:90%;overflow:auto;background:var(--card);border:2px solid var(--ink);border-radius:18px 6px 20px 8px/8px 20px 6px 18px;padding:16px 18px 20px;box-shadow:4px 6px 0 color-mix(in srgb,var(--ink) 18%,transparent);display:grid;gap:14px}
 .ph{display:flex;justify-content:space-between;align-items:center}
@@ -211,11 +221,20 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="btn" id="copy">Copy results</button>
     <button class="btn primary" id="next">Next page</button>
   </div>
+  <div class="ctl" style="margin-top:2px">
+    <button class="lnk" id="statsbtn2">See your stats</button>
+  </div>
 </section>
 
-<footer id="foot"><span class="nx">Next page in <b class="tmr">--:--:--</b></span><br>Your progress saves in this browser.</footer>
+<footer id="foot"><span class="nx">Next page in <b class="tmr">--:--:--</b></span><br><button class="lnk" id="statsbtn">Your stats</button> · Your progress saves in this browser.</footer>
 </main>
 
+<div class="sheet" id="statsh" hidden>
+  <div class="panel stp" role="dialog" aria-modal="true" aria-label="Your stats">
+    <div class="ph"><h2>Your stats</h2><button class="nb" id="stclose" aria-label="Close">&times;</button></div>
+    <div id="stbody"></div>
+  </div>
+</div>
 <div class="nah" id="nah" aria-live="assertive"></div>
 <div class="sheet" id="sheet" hidden>
   <div class="panel" role="dialog" aria-modal="true" aria-label="All pages">
@@ -225,6 +244,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <h3>The first notebook</h3>
     <div class="pgs" id="pages"></div>
     <div class="key"><span><i class="k1"></i>started</span><span><i class="k2"></i>solved</span><span>crossed out: ran out of ink</span></div>
+    <button class="btn" id="statsbtn3">Your stats</button>
     <button class="btn" id="erase">Erase this page and start over</button>
   </div>
 </div>
@@ -240,7 +260,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sleep=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
 const pad=n=>String(n).padStart(2,"0");
 const now=new Date(),TODAY=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
-let blOff=false,P=[],S={},cur=0,sel=[],busy=false,revealing=false,looking=false,noteT=0,lastDay="";
+let blOff=false,GS={},P=[],S={},cur=0,sel=[],busy=false,revealing=false,looking=false,noteT=0,lastDay="";
 
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const rot=w=>{let h=7;for(const c of w)h=(h*31+c.charCodeAt(0))%997;return ((h%25)-12)/10;};
@@ -250,8 +270,8 @@ const st=()=>S[cur]||(S[cur]=fresh(cur));
 const lvl=w=>G().findIndex(g=>g[1].includes(w));
 const fmt=d=>{const[y,m,dd]=d.split("-").map(Number);return `${MON[m-1]} ${dd}`;};
 const label=i=>{const d=P[i].date;return d?(d===TODAY?"today's page":fmt(d)):`page ${P[i].n||i+1}`;};
-const save=()=>{try{localStorage.setItem(K,JSON.stringify({S,cur,lastDay,blOff}));}catch(e){}};
-const load=()=>{try{const d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;}}catch(e){}};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify({S,cur,lastDay,blOff,GS}));}catch(e){}};
+const load=()=>{try{const d=JSON.parse(localStorage.getItem(K)||"null");if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;GS=d.GS||{};}}catch(e){}};
 const tileOf=w=>document.querySelector(`.tile[data-w="${CSS.escape(w)}"]`);
 
 function note(t){const n=$("#note");n.textContent=t;n.classList.add("on");clearTimeout(noteT);noteT=setTimeout(()=>n.classList.remove("on"),1500);}
@@ -319,6 +339,7 @@ async function submit(){
   const s=st(),key=sel.slice().sort().join("|");
   if(s.tried.includes(key)){note("already tried that");return;}
   busy=true;updBtns();setLook(false);
+  if(!s.t0)s.t0=Date.now();
   s.tried.push(key);
   const lv=sel.map(lvl);s.guesses.push(lv);
   const els=sel.map(tileOf);
@@ -326,7 +347,7 @@ async function submit(){
   await sleep(90*3+360);
   if(lv.every(x=>x===lv[0])){
     s.near=null;s.cheat=false;s.solved.push(lv[0]);sel=[];
-    if(s.solved.length===4){s.done=true;s.won=true;}
+    if(s.solved.length===4){s.done=true;s.won=true;s.t1=Date.now();}
     save();render(lv[0]);
     if(s.won){note(s.mistakes?"solved":"perfect");dance();}else emote("correct",1800);
   }else{
@@ -336,9 +357,9 @@ async function submit(){
     s.mistakes++;
     const left=[0,1,2,3].filter(l=>!s.solved.includes(l));
     const nl=left.find(l=>lv.filter(x=>x===l).length===3);const near=nl!==undefined;
-    s.near=near?nl:null;s.nearSel=near?sel.slice():null;
+    s.near=near?nl:null;s.nearSel=near?sel.slice():null;if(near)s.oa=(s.oa||0)+1;
     if(s.mistakes>=4){
-      note(MISS[3]);s.done=true;s.won=false;s.cheat=false;sel=[];save();emote("lose");
+      note(MISS[3]);s.done=true;s.won=false;s.cheat=false;s.t1=Date.now();sel=[];save();emote("lose");
       revealing=true;render();
       for(const l of left){await sleep(650);s.solved.push(l);save();render(l);}
       revealing=false;render();
@@ -463,15 +484,15 @@ async function danceReq(){
   if(busy||!BL||blOff||blClip||!P.length)return;
   const s=st(),now=Date.now();
   if(now-dLast>10000)dSpam=0;
-  const odds=Math.min(1,.01+.07*dSpam);dSpam++;dLast=now;
+  const odds=Math.min(1,.01+.07*dSpam);dSpam++;dLast=now;GS.dances=(GS.dances||0)+1;save();
   if(!s.done&&Math.random()<odds){
-    dSpam=0;
+    dSpam=0;GS.danceNahs=(GS.danceNahs||0)+1;
     busy=true;updBtns();setLook(false);
     showNah();s.mistakes++;save();render();emote("wrong",1800);
     await sleep(1700);
     if(s.mistakes>=4){
       const left=[0,1,2,3].filter(l=>!s.solved.includes(l));
-      note(MISS[3]);s.done=true;s.won=false;s.cheat=false;sel=[];save();emote("lose");
+      note(MISS[3]);s.done=true;s.won=false;s.cheat=false;s.t1=Date.now();sel=[];save();emote("lose");
       revealing=true;render();
       for(const l of left){await sleep(650);s.solved.push(l);save();render(l);}
       revealing=false;render();
@@ -488,7 +509,9 @@ async function useHint(){
   emote("hint");
   const c=$("#hintbtn");
   if(!reduce){c.classList.add("flip");await sleep(900);c.classList.remove("flip");}
+  s.flips=(s.flips||0)+1;
   if(Math.random()<.5){
+    s.tails=(s.tails||0)+1;
     s.near=null;s.nearSel=null;s.cheat=true;save();
     showNah();
     busy=false;emote("cheat");updBtns();return;
@@ -512,6 +535,32 @@ function pages(){
   $("#days").innerHTML=days.map(pb).join("");$("#dH").hidden=$("#days").hidden=!days.length;
   $("#pages").innerHTML=old.map(pb).join("");
 }
+const fmtT=ms=>{if(!(ms>0))return "—";const t=Math.round(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),x=t%60;return h?`${h}:${pad(m)}:${pad(x)}`:`${m}:${pad(x)}`;};
+const dayN=d=>{const[y,m,dd]=d.split("-").map(Number);return Math.round(Date.UTC(y,m-1,dd)/864e5);};
+function statsHTML(){
+  const all=P.map((p,i)=>[p,S[i]]).filter(([,s])=>s&&(s.guesses&&s.guesses.length||s.done));
+  const won=all.filter(([,s])=>s.done&&s.won),lost=all.filter(([,s])=>s.done&&!s.won);
+  const fin=won.length+lost.length,perfect=won.filter(([,s])=>!s.mistakes&&!s.hints&&!s.flips).length;
+  const times=won.map(([,s])=>s.t1&&s.t0?s.t1-s.t0:0).filter(t=>t>0);
+  const rows=all.flatMap(([,s])=>(s.guesses||[]).filter(r=>r[0]!=="c"));
+  const sum=k=>all.reduce((a,[,s])=>a+(s[k]||0),0);
+  const days=new Set(won.filter(([p])=>p.date).map(([p])=>dayN(p.date)));
+  let best=0,run=0,prev=null;[...days].sort((a,b)=>a-b).forEach(d=>{run=prev!==null&&d===prev+1?run+1:1;best=Math.max(best,run);prev=d;});
+  let cs=0,d=dayN(TODAY);if(!days.has(d))d--;while(days.has(d)){cs++;d--;}
+  const dailyDone=all.filter(([p,s])=>p.date&&s.done).length;
+  const dist=[0,1,2,3].map(m=>won.filter(([,s])=>(s.mistakes||0)===m).length),mx=Math.max(1,...dist,lost.length);
+  const card=(v,l,w)=>`<div class="stc"${w?' style="grid-column:1/-1"':""}><b>${esc(v)}</b><span>${esc(l)}</span></div>`;
+  const pct=fin?Math.round(won.length/fin*100)+"%":"—";
+  const since=GS.firstDay?fmt(GS.firstDay)+", "+GS.firstDay.slice(0,4):"today";
+  return `<div class="sth">Pages</div><div class="stg">${card(since,"Playing since",1)}${card(all.length,"Pages played")}${card(won.length,"Pages solved")}${card(pct,"Win rate")}${card(dailyDone,"Daily pages done")}${card(cs,"Current streak")}${card(best,"Best streak")}${card(perfect,"Perfect pages")}</div>
+  <div class="sth">Speed</div><div class="stg">${card(fmtT(times.length?Math.min(...times):0),"Fastest solve")}${card(fmtT(times.length?times.reduce((a,b)=>a+b,0)/times.length:0),"Average solve")}${card(fmtT(times.reduce((a,b)=>a+b,0)),"Total time solving")}</div>
+  <div class="sth">Guesses</div><div class="stg">${card(rows.length,"Total tries")}${card(won.length?(won.reduce((a,[,s])=>a+(s.guesses||[]).filter(r=>r[0]!=="c").length,0)/won.length).toFixed(1):"—","Tries per solve")}${card(sum("mistakes"),"Mistakes made")}${card(sum("oa"),"One aways")}</div>
+  <div class="sth">Mistakes on solved pages</div><div class="dist">${dist.map((n,m)=>`<div class="drow"><span>${m===0?"No mistakes":m===1?"1 mistake":m+" mistakes"}</span><div class="dbar h${m}" style="width:${Math.max(8,n/mx*100)}%">${n}</div></div>`).join("")}<div class="drow"><span>Out of ink</span><div class="dbar" style="width:${Math.max(8,lost.length/mx*100)}%;background:color-mix(in srgb,var(--red) 55%,var(--card))">${lost.length}</div></div></div>
+  <div class="sth">The coin</div><div class="stg">${card(sum("flips"),"Coin flips")}${card(sum("hints"),"Heads (50/50s)")}${card(sum("tails"),"Nahs")}</div>
+  <div class="sth">Blurbo</div><div class="stg">${card(GS.shots||0,"Times shot")}${card(GS.revives||0,"Times revived")}${card(GS.dances||0,"Dance requests")}${card(GS.danceNahs||0,"Baguette betrayals")}</div>`;
+}
+function openStats(){$("#stbody").innerHTML=statsHTML();$("#sheet").hidden=true;$("#statsh").hidden=false;$("#stclose").focus();}
+function closeStats(){$("#statsh").hidden=true;}
 function openSheet(){pages();$("#sheet").hidden=false;$("#close").focus();}
 function closeSheet(){$("#sheet").hidden=true;$("#pg").focus();}
 
@@ -519,6 +568,7 @@ $("#grid").addEventListener("click",e=>{
   const t=e.target.closest(".tile");if(!t||busy||st().done)return;
   const w=t.dataset.w;
   if(looking){showDef(w);return;}
+  {const s0=st();if(!s0.t0&&!s0.done){s0.t0=Date.now();save();}}
   const i=sel.indexOf(w);
   if(i>=0)sel.splice(i,1);else if(sel.length<4)sel.push(w);else return;
   t.setAttribute("aria-pressed",String(i<0));updBtns();rest();poke();
@@ -526,7 +576,7 @@ $("#grid").addEventListener("click",e=>{
 $("#look").addEventListener("click",()=>{setLook(!looking);});
 $("#hintbtn").addEventListener("click",useHint);
 $("#dbtn").addEventListener("click",()=>{danceReq();poke();});
-$("#gun").addEventListener("click",()=>{const off=!blOff;if(off)note("bang!");setBl(off,true);save();});
+$("#gun").addEventListener("click",()=>{const off=!blOff;if(off)GS.shots=(GS.shots||0)+1;else GS.revives=(GS.revives||0)+1;if(off)note("bang!");setBl(off,true);save();});
 $("#slipX").addEventListener("click",()=>setLook(false));
 $("#sub2").addEventListener("click",submit);
 $("#desel").addEventListener("click",()=>{sel=[];document.querySelectorAll(".tile").forEach(t=>t.setAttribute("aria-pressed","false"));updBtns();rest();poke();});
@@ -536,9 +586,12 @@ $("#nextp").addEventListener("click",()=>P.length&&go(cur+1));
 $("#next").addEventListener("click",()=>go(cur+1));
 $("#pg").addEventListener("click",()=>P.length&&openSheet());
 $("#close").addEventListener("click",closeSheet);
+["#statsbtn","#statsbtn2","#statsbtn3"].forEach(q=>$(q).addEventListener("click",openStats));
+$("#stclose").addEventListener("click",closeStats);
+$("#statsh").addEventListener("click",e=>{if(e.target.id==="statsh")closeStats();});
 $("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();const b=e.target.closest(".pb");if(b){go(+b.dataset.i);closeSheet();}});
 $("#erase").addEventListener("click",()=>{delete S[cur];sel=[];save();render();closeSheet();note("fresh page");});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#sheet").hidden)closeSheet();else if(looking)setLook(false);}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#statsh").hidden){closeStats();return;}if(e.key==="Escape"){if(!$("#sheet").hidden)closeSheet();else if(looking)setLook(false);}});
 $("#copy").addEventListener("click",()=>{
   const s=st(),txt=`Inklings, ${label(cur)}${s.hints?" "+"\u{1FA99}".repeat(s.hints):""}\n`+s.guesses.map(r=>r[0]==="c"?EMO[r[1]].repeat(4)+" \u{1FA99}":r.map(l=>EMO[l]).join("")).join("\n");
   try{navigator.clipboard.writeText(txt).then(()=>note("copied"),()=>note("couldn't copy"));}catch(e){note("couldn't copy");}
@@ -554,7 +607,8 @@ function pickStart(){
   else if(t<0&&!S[cur]){const dated=P.map((p,i)=>p.date?i:-1).filter(i=>i>=0);if(dated.length&&lastDay!==TODAY){cur=dated[dated.length-1];lastDay=TODAY;}}
 }
 async function start(d){
-  if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;}else load();
+  if(d&&d.S){S=d.S;cur=d.cur||0;lastDay=d.lastDay||"";blOff=!!d.blOff;GS=d.GS||{};}else load();
+  if(!GS.firstDay)GS.firstDay=TODAY;
   try{
     const r=await fetch("puzzles.json",{cache:"no-store"});
     if(!r.ok)throw new Error(r.status);
@@ -568,7 +622,7 @@ async function start(d){
   await loadBl();if(BL)setBl(blOff,false);rest();poke();
   tick();setInterval(tick,1000);
 }
-window.claude?.hot?.snapshot?.(()=>({S,cur,lastDay,blOff}));
+window.claude?.hot?.snapshot?.(()=>({S,cur,lastDay,blOff,GS}));
 window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
 }
 </script>
