@@ -27,7 +27,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'blurbo.json')
 REQUIRED = ['pud', 'legs', 'torso', 'hd', 'ey', 'gr', 'gb', 'gl', 'mic', 'gs', 'sp']
 MOTIONS = ['none', 'bob', 'sway', 'shake', 'bounce', 'wiggle', 'float', 'pulse', 'melt', 'stretch', 'spin']
-TRIGGERS = ['idle', 'pick1', 'pick2', 'pick3', 'pick4', 'correct', 'wrong', 'oneaway', 'look', 'lose', 'escape', 'hint']
+TRIGGERS = ['idle', 'pick1', 'pick2', 'pick3', 'pick4', 'correct', 'wrong', 'oneaway', 'look', 'lose', 'escape', 'hint', 'cheat']
 
 def load(): return json.load(open(PATH, encoding='utf-8'))
 def save(b):

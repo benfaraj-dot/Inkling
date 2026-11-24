@@ -15,7 +15,7 @@
 <title>Inklings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
 /* VOICE everyday game, playful but calm, like a puzzle scribbled in a notebook margin
    IDEA a page of ruled notebook paper; tiles are hand cut cards, solved groups get swiped with highlighter
@@ -88,9 +88,14 @@ nav{display:flex;align-items:center;gap:2px}
 @keyframes coinr{to{transform:rotate(16deg) scale(1.08)}}
 .coin.flip{animation:cflip .9s ease-in-out}
 @keyframes cflip{0%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(900deg) translateY(-28px)}100%{transform:rotateY(1800deg) translateY(0)}}
-.nah{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:20;font:700 clamp(120px,42vw,240px)/1 Caveat,cursive;color:var(--red);rotate:-8deg;opacity:0}
-.nah.on{animation:nah 1.4s ease-out forwards}
-@keyframes nah{0%{opacity:0;transform:scale(.6)}15%{opacity:1;transform:scale(1.06)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+.nah{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:20;font:400 clamp(110px,36vw,230px)/1 "Permanent Marker",Impact,sans-serif;color:#e3271a;-webkit-text-stroke:5px #141310;paint-order:stroke fill;text-shadow:7px 7px 0 #141310;letter-spacing:-.02em;rotate:-9deg;opacity:0}
+.nah.on{animation:nah 1.7s cubic-bezier(.2,.9,.3,1) forwards}
+@keyframes nah{0%{opacity:0;transform:scale(3.2) rotate(-18deg)}10%{opacity:1;transform:scale(.88) rotate(-4deg)}15%{transform:scale(1.08) rotate(2deg)}20%{transform:translate(-8px,4px)}25%{transform:translate(8px,-5px)}30%{transform:translate(-6px,-3px)}35%{transform:translate(5px,5px)}40%{transform:translate(0,0)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
+.jolt{animation:jolt .45s linear}
+@keyframes jolt{15%{transform:translate(-10px,6px) rotate(-.6deg)}30%{transform:translate(9px,-7px) rotate(.5deg)}45%{transform:translate(-7px,-4px)}60%{transform:translate(6px,5px)}80%{transform:translate(-3px,2px)}}
+#blfig .w1,#blfig .w2,#blfig .w3{transform-box:fill-box;transform-origin:center;animation:whyp 2.4s ease-out infinite;opacity:0}
+#blfig .w2{animation-delay:.6s}#blfig .w3{animation-delay:1.2s}
+@keyframes whyp{0%{opacity:0;scale:.4}10%{opacity:1;scale:1.15}16%{scale:1}80%{opacity:1}100%{opacity:0;scale:1}}
 .coin:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .tile.odd{outline:3px solid var(--red);outline-offset:2px}
 .tile.gold{outline:3px solid #e0a526;outline-offset:2px;background:color-mix(in srgb,#e0a526 22%,var(--card))}
@@ -147,7 +152,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 @keyframes bbob{to{transform:scale(1.03,.95)}}@keyframes bsway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}@keyframes bshake{from{transform:translateX(-3px)}to{transform:translateX(3px)}}@keyframes bbounce{to{transform:translateY(-8px) scale(.98,1.03)}}@keyframes bwig{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}@keyframes bfloat{to{transform:translateY(-4px)}}@keyframes bpulse{to{transform:scale(1.06)}}@keyframes bmelt{to{transform:scale(1.04,.9)}}@keyframes bstretch{to{transform:scale(.95,1.06)}}@keyframes bspin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
 @media(min-width:600px){main{padding-top:30px}}
 @media(max-width:600px){body::before{left:8px;width:1.5px;opacity:.6}}
-@media(prefers-reduced-motion:reduce){.tile.hop,.tile.shake,.row.new,#blmv,.coin.ready,.coin.flip{animation:none}.nah.on{animation:none;opacity:1}.tile,.btn{transition:none}}
+@media(prefers-reduced-motion:reduce){.tile.hop,.tile.shake,.row.new,#blmv,.coin.ready,.coin.flip,.jolt{animation:none}.nah.on{animation:none;opacity:1}#blfig .w1,#blfig .w2,#blfig .w3{animation:none;opacity:1}.tile,.btn{transition:none}}
 </style>
 </head>
 <body>
@@ -313,7 +318,7 @@ async function submit(){
   els.forEach((t,i)=>setTimeout(()=>t&&t.classList.add("hop"),reduce?0:i*90));
   await sleep(90*3+360);
   if(lv.every(x=>x===lv[0])){
-    s.near=null;s.solved.push(lv[0]);sel=[];
+    s.near=null;s.cheat=false;s.solved.push(lv[0]);sel=[];
     if(s.solved.length===4){s.done=true;s.won=true;}
     save();render(lv[0]);
     if(s.won){note(s.mistakes?"solved":"perfect");dance();}else emote("correct",1800);
@@ -326,7 +331,7 @@ async function submit(){
     const nl=left.find(l=>lv.filter(x=>x===l).length===3);const near=nl!==undefined;
     s.near=near?nl:null;s.nearSel=near?sel.slice():null;
     if(s.mistakes>=4){
-      note(MISS[3]);s.done=true;s.won=false;sel=[];save();emote("lose");
+      note(MISS[3]);s.done=true;s.won=false;s.cheat=false;sel=[];save();emote("lose");
       revealing=true;render();
       for(const l of left){await sleep(650);s.solved.push(l);save();render(l);}
       revealing=false;render();
@@ -368,6 +373,7 @@ function rest(){
   if(!BL||!P.length||blOff)return;
   const s=st();
   if(s.done){if(s.won){if(!blDance)dance();}else emote("lose");return;}
+  if(s.cheat){emote("cheat");return;}
   if(looking){emote("look");return;}
   emote(["idle","pick1","pick2","pick3","pick4"][sel.length]||"idle");
 }
@@ -433,21 +439,21 @@ async function useHint(){
   const c=$("#hintbtn");
   if(!reduce){c.classList.add("flip");await sleep(900);c.classList.remove("flip");}
   if(Math.random()<.5){
-    s.near=null;s.nearSel=null;save();
-    const n=$("#nah");n.textContent="nah";n.classList.remove("on");void n.offsetWidth;n.classList.add("on");
-    setTimeout(()=>{n.classList.remove("on");n.textContent="";},1400);
-    emote("wrong",1800);busy=false;updBtns();return;
+    s.near=null;s.nearSel=null;s.cheat=true;save();
+    const n=$("#nah"),mn=document.querySelector("main");n.textContent="NAH";n.classList.remove("on");mn.classList.remove("jolt");void n.offsetWidth;n.classList.add("on");
+    setTimeout(()=>mn.classList.add("jolt"),170);
+    setTimeout(()=>{n.classList.remove("on");n.textContent="";mn.classList.remove("jolt");},1700);
+    busy=false;emote("cheat");updBtns();return;
   }
   const l=s.near,g=G()[l][1],was=s.nearSel||[];
   const solvedW=new Set(s.solved.flatMap(k=>G()[k][1]));
   const opts=s.order.filter(w=>!solvedW.has(w)&&!was.includes(w));
   const wrong=shuffle(opts.filter(w=>!g.includes(w))).slice(0,Math.floor(opts.length/2));
   s.cross=s.cross||{};s.cross[l]=(s.cross[l]||[]).concat(wrong);
-  s.hints=(s.hints||0)+1;s.near=null;s.nearSel=null;save();
+  s.hints=(s.hints||0)+1;s.near=null;s.nearSel=null;s.cheat=true;save();
   note("50/50!");
   for(const w of wrong){const t=tileOf(w);if(t)t.classList.add("x");await sleep(90);}
-  emote("correct",1800);
-  busy=false;updBtns();
+  busy=false;emote("cheat");updBtns();
 }
 function go(i){cur=(i+P.length)%P.length;sel=[];setLook(false);save();render();stopDance();rest();}
 
