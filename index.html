@@ -120,7 +120,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .gun{position:absolute;left:0;top:66px;min-width:44px;height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 4px;border:0;border-radius:10px;background:none;color:var(--ink);font:700 22px/1 Caveat,cursive;cursor:pointer;z-index:2}
 .gun:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
 .gun:focus-visible{outline:3px solid var(--red);outline-offset:2px}
-.gun svg{width:42px;height:30px}
+.gun svg{width:42px;height:30px}.gun .ti{display:none;width:34px;height:38px}.gun.dead .gi{display:none}.gun.dead .ti{display:block}.gun.dead:hover .ti{animation:bwiggle .5s ease-in-out}@keyframes bwiggle{25%{rotate:-6deg}75%{rotate:6deg}}
 .stage.off{height:44px}
 .stage.off::after,.stage.off #bl{display:none}
 .stage.off .gun{top:0}
@@ -146,7 +146,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="nb" id="nextp" aria-label="Next page">&rsaquo;</button>
   </nav>
 </header>
-<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><span id="gunL"></span></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
+<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
 <p class="sub" id="sub">Make four groups of four.</p>
 
 <div class="board">
@@ -360,8 +360,7 @@ function dance(){
 }
 function setBl(off,anim){
   blOff=off;const sg=$("#stage");
-  $("#gun").setAttribute("aria-label",off?"Bring Blurbo back":"Remove Blurbo");
-  $("#gunL").textContent=off?"bring him back":"";
+  const gn=$("#gun");gn.setAttribute("aria-label",off?"Revive Blurbo":"Remove Blurbo");gn.classList.toggle("dead",off);
   if(off){
     stopDance();clearTimeout(blT);
     if(anim&&!reduce){$("#blmv").setAttribute("class","m-gone");setTimeout(()=>{if(blOff)sg.classList.add("off");},650);}
