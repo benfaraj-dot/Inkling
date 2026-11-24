@@ -80,6 +80,16 @@ nav{display:flex;align-items:center;gap:2px}
 .dot.gone{border-color:var(--soft)}
 .dot.gone::before,.dot.gone::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:2.5px;background:var(--red);border-radius:2px;translate:-50% -50%;rotate:42deg}
 .dot.gone::after{rotate:-38deg}
+.mr{display:flex;align-items:center;gap:10px}
+.coin{appearance:none;position:absolute;right:88px;top:62px;z-index:2;width:46px;height:46px;padding:0;border-radius:50%;border:3px solid #9a6e10;background:radial-gradient(circle at 34% 30%,#fff0b8,#e0a526 55%,#b07c14);display:grid;place-items:center;cursor:pointer;box-shadow:2px 3px 0 color-mix(in srgb,var(--ink) 25%,transparent);transition:opacity .15s}
+.coin svg{width:24px;height:24px}
+.coin[aria-disabled=true]{opacity:.45;filter:saturate(.35)}
+.coin.ready{animation:coinr 1.1s ease-in-out infinite alternate}
+@keyframes coinr{to{transform:rotate(16deg) scale(1.08)}}
+.coin:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.tile.odd{outline:3px solid var(--red);outline-offset:2px}
+.tile.gold{outline:3px solid #e0a526;outline-offset:2px;background:color-mix(in srgb,#e0a526 22%,var(--card))}
+.mrow.hint i{box-shadow:inset 0 0 0 3px #e0a526}
 .look{appearance:none;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border:2px dashed var(--pen);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;background:transparent;color:var(--pen);font:700 16px/1 Kalam,cursive;cursor:pointer}
 .look svg{width:20px;height:20px}
 .look[aria-pressed=true]{background:var(--pen);color:var(--card);border-style:solid}
@@ -124,13 +134,14 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .stage.off{height:44px}
 .stage.off::after,.stage.off #bl{display:none}
 .stage.off .gun{top:0}
+.stage.off .coin{top:0;right:0}
 .m-gone{animation:bgone .6s ease-in forwards}
 @keyframes bgone{30%{transform:rotate(-14deg) scale(1.05)}100%{transform:scale(1.3,0);opacity:0}}
 .m-bob{animation:bbob .45s ease-in-out infinite alternate}.m-sway{animation:bsway .9s ease-in-out infinite alternate}.m-shake{animation:bshake .12s linear infinite alternate}.m-bounce{animation:bbounce .35s ease-in-out infinite alternate}.m-wiggle{animation:bwig .2s ease-in-out infinite alternate}.m-float{animation:bfloat 1.6s ease-in-out infinite alternate}.m-pulse{animation:bpulse .5s ease-in-out infinite alternate}.m-melt{animation:bmelt 1.2s ease-in-out infinite alternate}.m-stretch{animation:bstretch .8s ease-in-out infinite alternate}.m-spin{animation:bspin .6s ease-in-out infinite}
 @keyframes bbob{to{transform:scale(1.03,.95)}}@keyframes bsway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}@keyframes bshake{from{transform:translateX(-3px)}to{transform:translateX(3px)}}@keyframes bbounce{to{transform:translateY(-8px) scale(.98,1.03)}}@keyframes bwig{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}@keyframes bfloat{to{transform:translateY(-4px)}}@keyframes bpulse{to{transform:scale(1.06)}}@keyframes bmelt{to{transform:scale(1.04,.9)}}@keyframes bstretch{to{transform:scale(.95,1.06)}}@keyframes bspin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
 @media(min-width:600px){main{padding-top:30px}}
 @media(max-width:600px){body::before{left:8px;width:1.5px;opacity:.6}}
-@media(prefers-reduced-motion:reduce){.tile.hop,.tile.shake,.row.new,#blmv{animation:none}.tile,.btn{transition:none}}
+@media(prefers-reduced-motion:reduce){.tile.hop,.tile.shake,.row.new,#blmv,.coin.ready{animation:none}.tile,.btn{transition:none}}
 </style>
 </head>
 <body>
@@ -146,7 +157,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <button class="nb" id="nextp" aria-label="Next page">&rsaquo;</button>
   </nav>
 </header>
-<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
+<div class="stage" id="stage"><button class="gun" id="gun" aria-label="Remove Blurbo"><svg class="gi" viewBox="0 0 42 30" aria-hidden="true"><path d="M6 9 h27 a3 3 0 0 1 3 3 v2 a3 3 0 0 1 -3 3 h-14 l-4 10 h-7 l3 -10 h-5 a2 2 0 0 1 -2 -2 v-4 a2 2 0 0 1 2 -2 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M19 17 c0 4 3 5 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="36" y="10.5" width="5" height="5" rx="1.5" fill="#e0a526" stroke="currentColor" stroke-width="1.6"></rect></svg><svg class="ti" viewBox="0 0 34 38" aria-hidden="true"><path d="M2 36 h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path><path d="M6 35 V14 a11 11 0 0 1 22 0 V35 z" fill="var(--card)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path><path d="M17 9 c3 4 5 7 5 10 a5 5 0 0 1 -10 0 c0 -3 2 -6 5 -10 z" fill="currentColor"></path><path d="M11 27 h12 M13 31 h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"></path><path d="M3 36 l1.5 -4 l1.5 4 M28 36 l1.5 -4 l1.5 4" fill="none" stroke="#5aa05e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><button class="coin" id="hintbtn" aria-disabled="true" aria-label="Hint coin, only works when you are one away"><svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" fill="none" stroke="#9a6e10" stroke-width="1.4"></circle><path d="M0 -7 L2 -2.2 L6.7 -2.2 L2.9 0.9 L4.3 5.7 L0 2.8 L-4.3 5.7 L-2.9 0.9 L-6.7 -2.2 L-2 -2.2 Z" fill="#8a5f0c"></path></svg></button><svg id="bl" viewBox="0 -24 200 340" aria-hidden="true"><defs id="bldefs"></defs><g id="blmv" class="m-none"><g id="blfig"></g></g></svg></div>
 <p class="sub" id="sub">Make four groups of four.</p>
 
 <div class="board">
@@ -163,7 +174,8 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 <section id="play" class="board" style="gap:14px">
   <div class="mist">
     <div class="ml"><span>Mistakes left</span><div id="dots"></div></div>
-    <button class="look" id="look" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1.4 6-1.4 9 .6 3-2 6-2 9-.6V19c-3-1.3-6-1.3-9 .6-3-1.9-6-1.9-9-.6z M12 6.1V19.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Look up</button>
+    <div class="mr">
+    <button class="look" id="look" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1.4 6-1.4 9 .6 3-2 6-2 9-.6V19c-3-1.3-6-1.3-9 .6-3-1.9-6-1.9-9-.6z M12 6.1V19.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Look up</button></div>
   </div>
   <div class="ctl">
     <button class="btn" id="shuf">Shuffle</button>
@@ -232,10 +244,13 @@ function fit(){
   });
 }
 
+function hintOk(){const s=P.length&&st();return !!s&&!s.done&&!busy&&s.near!=null&&!s.solved.includes(s.near);}
+function updCoin(){const ok=hintOk(),c=$("#hintbtn");c.setAttribute("aria-disabled",String(!ok));c.classList.toggle("ready",ok);}
 function updBtns(){
   $("#sub2").disabled=sel.length!==4||busy;
   $("#desel").disabled=!sel.length||busy;
   $("#shuf").disabled=busy;
+  updCoin();
 }
 
 function setLook(on){
@@ -272,9 +287,10 @@ function render(newL){
 
 function endCard(s){
   const m=s.mistakes;
-  $("#endT").textContent=s.won?["flawless","nice work","got there","phew, close one"][m]:"tough page";
-  $("#endS").textContent=s.won?(m===0?"No mistakes.":m===1?"1 mistake.":`${m} mistakes.`):"The answers are filled in above.";
-  $("#mini").innerHTML=s.guesses.map(r=>`<div class="mrow">${r.map(l=>`<i class="h${l}"></i>`).join("")}</div>`).join("");
+  const h=s.hints||0;
+  $("#endT").textContent=s.won?(h&&m===0?"nice work":["flawless","nice work","got there","phew, close one"][m]):"tough page";
+  $("#endS").textContent=(s.won?(m===0?"No mistakes.":m===1?"1 mistake.":`${m} mistakes.`):"The answers are filled in above.")+(h?(h===1?" 1 hint used.":` ${h} hints used.`):"");
+  $("#mini").innerHTML=s.guesses.map(r=>r[0]==="c"?`<div class="mrow hint">${[0,1,2,3].map(()=>`<i class="h${r[1]}"></i>`).join("")}</div>`:`<div class="mrow">${r.map(l=>`<i class="h${l}"></i>`).join("")}</div>`).join("");
   $("#next").textContent=cur<P.length-1?"Next page":"Back to page 1";
 }
 
@@ -289,7 +305,7 @@ async function submit(){
   els.forEach((t,i)=>setTimeout(()=>t&&t.classList.add("hop"),reduce?0:i*90));
   await sleep(90*3+360);
   if(lv.every(x=>x===lv[0])){
-    s.solved.push(lv[0]);sel=[];
+    s.near=null;s.solved.push(lv[0]);sel=[];
     if(s.solved.length===4){s.done=true;s.won=true;}
     save();render(lv[0]);
     if(s.won){note(s.mistakes?"solved":"perfect");dance();}else emote("correct",1800);
@@ -299,7 +315,8 @@ async function submit(){
     els.forEach(t=>t&&t.classList.remove("shake"));
     s.mistakes++;
     const left=[0,1,2,3].filter(l=>!s.solved.includes(l));
-    const near=left.some(l=>lv.filter(x=>x===l).length===3);
+    const nl=left.find(l=>lv.filter(x=>x===l).length===3);const near=nl!==undefined;
+    s.near=near?nl:null;s.nearSel=near?sel.slice():null;
     if(s.mistakes>=4){
       note(MISS[3]);s.done=true;s.won=false;sel=[];save();emote("lose");
       revealing=true;render();
@@ -381,6 +398,24 @@ function poke(){
   blIdle=setTimeout(()=>{if(BL&&!busy&&P.length&&!st().done&&!looking&&!sel.length)emote("escape",3200);poke();},16000);
 }
 
+async function useHint(){
+  if(busy||!P.length)return;
+  const s=st();
+  if(!hintOk()){note(s.done?"page is done":"only when one away");return;}
+  busy=true;updBtns();setLook(false);
+  const l=s.near,g=G()[l][1],was=s.nearSel||[];
+  const odd=was.find(w=>!g.includes(w)),miss=g.find(w=>!was.includes(w));
+  emote("hint");note("blurbo's tip");
+  const o=odd&&tileOf(odd),mi=miss&&tileOf(miss);
+  if(o)o.classList.add("odd");if(mi)mi.classList.add("gold");
+  await sleep(1500);
+  s.solved.push(l);s.hints=(s.hints||0)+1;s.guesses.push(["c",l]);s.near=null;s.nearSel=null;
+  sel=[];
+  if(s.solved.length===4){s.done=true;s.won=true;}
+  save();busy=false;render(l);
+  if(s.won){note("solved");dance();}else emote("correct",1800);
+  updBtns();
+}
 function go(i){cur=(i+P.length)%P.length;sel=[];setLook(false);save();render();stopDance();rest();}
 
 function pb(i){const s=S[i];const c=s&&s.done?(s.won?"won":"lost"):(s&&s.guesses.length?"mid":"");const d=P[i].date;return `<button class="pb ${c}${d?" day":""}${i===cur?" cur":""}" data-i="${i}" aria-label="${esc(label(i))}">${d?esc(d===TODAY?"today":fmt(d)):esc(P[i].n||i+1)}</button>`;}
@@ -402,6 +437,7 @@ $("#grid").addEventListener("click",e=>{
   t.setAttribute("aria-pressed",String(i<0));updBtns();rest();poke();
 });
 $("#look").addEventListener("click",()=>{setLook(!looking);});
+$("#hintbtn").addEventListener("click",useHint);
 $("#gun").addEventListener("click",()=>{const off=!blOff;if(off)note("bang!");setBl(off,true);save();});
 $("#slipX").addEventListener("click",()=>setLook(false));
 $("#sub2").addEventListener("click",submit);
@@ -416,7 +452,7 @@ $("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();c
 $("#erase").addEventListener("click",()=>{delete S[cur];sel=[];save();render();closeSheet();note("fresh page");});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#sheet").hidden)closeSheet();else if(looking)setLook(false);}});
 $("#copy").addEventListener("click",()=>{
-  const s=st(),txt=`Inklings, ${label(cur)}\n`+s.guesses.map(r=>r.map(l=>EMO[l]).join("")).join("\n");
+  const s=st(),txt=`Inklings, ${label(cur)}\n`+s.guesses.map(r=>r[0]==="c"?EMO[r[1]].repeat(4)+" \u{1FA99}":r.map(l=>EMO[l]).join("")).join("\n");
   try{navigator.clipboard.writeText(txt).then(()=>note("copied"),()=>note("couldn't copy"));}catch(e){note("couldn't copy");}
 });
 
