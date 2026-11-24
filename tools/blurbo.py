@@ -15,6 +15,11 @@ current base (renamed partId__base), so daily design refinements are never lost.
 Props (gadgets) live in defs as <g id="p-name"> with a catalog in blurbo.json "props":
 [{"id", "name", "added", "anchor", "tags"}]. Any emote or dance uses one with
 <use href="#p-name" transform="translate(x y) rotate(a) scale(s)"></use>, usually followed by a glove at the grip.
+
+Falls and rises: blurbo.json "falls" (played when Blurbo is shot) and "rises" (played when he is
+revived) are clips [{"id", "name", "added", "steps": [{"svg", "motion", "ms"}]}], 3 to 10 steps,
+ms 150 to 1500, played once each. The game picks one at random (never the same twice in a row).
+FX parts for them live in defs as fx-* (fx-wings, fx-halo, fx-abv clipPath for rising out of the line).
 """
 import json, re, sys, os, xml.etree.ElementTree as ET
 
@@ -109,6 +114,15 @@ def check(b):
         for i, s in enumerate(d['steps']):
             chk(s['svg'], '%s#%d' % (d['id'], i))
             if s.get('motion') not in MOTIONS or not 250 <= s.get('ms', 0) <= 1200: errs.append('%s#%d: motion/ms' % (d['id'], i))
+    for key in ('falls', 'rises'):
+        cids = [c['id'] for c in b.get(key, [])]
+        if len(set(cids)) != len(cids): errs.append('duplicate %s ids' % key)
+        for c in b.get(key, []):
+            if not all(c.get(k) for k in ('id', 'name', 'added')): errs.append('%s: clip needs id, name, added' % c.get('id'))
+            if not 3 <= len(c.get('steps', [])) <= 10: errs.append('%s: step count (3 to 10)' % c.get('id'))
+            for i, st in enumerate(c.get('steps', [])):
+                chk(st['svg'], '%s#%d' % (c['id'], i))
+                if st.get('motion') not in MOTIONS or not 150 <= st.get('ms', 0) <= 1500: errs.append('%s#%d: motion/ms' % (c['id'], i))
     now = b.get('outfitNow', 'suit')
     if now != 'suit' and (b.get('outfitStash', {}).get('name') != now): errs.append('outfitNow without matching outfitStash')
     if now == 'suit' and (b.get('outfitStash') or STYLE_RE.search(b['defs'])): errs.append('suit on but outfit leftovers remain')
@@ -144,6 +158,9 @@ def figures(b, flt=None):
         for v in vs: out.append((k + ':' + v['id'], v['svg'], v['motion']))
     for d in b['dances']:
         for i, s in enumerate(d['steps']): out.append(('%s#%d' % (d['id'], i), s['svg'], s['motion']))
+    for key in ('falls', 'rises'):
+        for c in b.get(key, []):
+            for i, s in enumerate(c['steps']): out.append(('%s#%d' % (c['id'], i), s['svg'], s['motion']))
     if flt: out = [f for f in out if any(x in f[0] for x in flt.split(','))]
     return out
 
