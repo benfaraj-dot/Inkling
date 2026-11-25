@@ -171,13 +171,10 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .cd.today .n{text-decoration:underline 2.5px var(--red);text-underline-offset:3px}
 .cd.sel{outline:2.5px solid var(--red);outline-offset:2px}
 .cd:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.cdots{display:flex;gap:2px;height:5px}
-.cdots i{width:5px;height:5px;box-sizing:border-box;border-radius:50%;border:1.5px solid color-mix(in srgb,currentColor 55%,transparent)}
-.cdots i.mid{border-color:var(--pen);background:linear-gradient(90deg,var(--pen) 50%,transparent 50%)}
-.cdots i.won{border-color:var(--pen);background:var(--pen)}
-.cdots i.lost{border-color:var(--red);background:var(--red)}
-.cd.all .cdots i{border-color:var(--card);background:var(--card)}
-.cd.all .cdots i.lost{background:var(--red)}
+.tal{width:30px;height:14px;overflow:visible}
+.tal path{fill:none;stroke-width:2.2;stroke-linecap:round}
+.tal .won{stroke:var(--pen)}.tal .lost{stroke:var(--red)}.tal .mid{stroke:color-mix(in srgb,var(--pen) 55%,transparent);stroke-dasharray:2.2 2.4}
+.cd.all .tal .won{stroke:var(--card)}
 .cday{display:grid;gap:8px;border-top:2px dashed color-mix(in srgb,var(--ink) 25%,transparent);padding-top:10px}
 .cday h4{margin:0;font:700 24px/1.1 Caveat,cursive}
 .cday h4 small{font:400 15px/1 Kalam,cursive;color:var(--soft);margin-left:6px}
@@ -280,7 +277,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
     <div class="cal" id="cal"></div>
     <h3>The first notebook</h3>
     <div class="pgs" id="pages"></div>
-    <div class="key"><span><i class="k1"></i>started</span><span><i class="k2"></i>solved</span><span>crossed out or red dot: ran out of ink</span><span>one dot per puzzle; a filled day means all of them are solved</span></div>
+    <div class="key"><span><i class="k1"></i>started</span><span><i class="k2"></i>solved</span><span>crossed out: ran out of ink</span><span>tally: one mark per puzzle solved (red: ran out of ink, dashed: started); a filled day means all are solved</span></div>
     <button class="btn" id="statsbtn3">Your stats</button>
     <button class="btn" id="erase">Erase this page and start over</button>
   </div>
@@ -591,6 +588,7 @@ function waveFlag(){
 function go(i){cur=(i+P.length)%P.length;sel=[];hideBub();setLook(false);save();render();stopDance();rest();}
 
 function pb(i){const s=S[i];const c=s&&s.done?(s.won?"won":"lost"):(s&&s.guesses.length?"mid":"");const d=P[i].date;return `<button class="pb ${c}${i===cur?" cur":""}" data-i="${i}" aria-label="${esc(label(i))}">${d?dayList(i).indexOf(i)+1:esc(P[i].n||i+1)}</button>`;}
+const TALLY=["M5 2.5 C5.7 6 4.6 9 5.3 12.5","M11 2 C11.6 6 10.6 9 11.2 12.8","M17 2.6 C17.5 6 16.7 9.5 17.3 12.4","M23 2.2 C23.6 6 22.6 9 23.2 12.6","M1.5 10.8 C10 8.6 18 6.2 28 2.6"];
 function pst(i){const s=S[i];return s&&s.done?(s.won?"won":"lost"):(s&&s.guesses&&s.guesses.length?"mid":"");}
 function calendar(ds){
   const c=$("#cal");if(!ds.length){c.hidden=true;return;}c.hidden=false;
@@ -602,10 +600,10 @@ function calendar(ds){
   for(let d=1;d<=n;d++){
     const ds2=`${calM}-${pad(d)}`,L=has.has(ds2)?P.reduce((a,p,j)=>(p.date===ds2&&a.push(j),a),[]):[];
     const tc=ds2===TODAY?" today":"";
-    if(!L.length){cells+=`<span class="cd off${tc}"><span class="n">${d}</span><span class="cdots"></span></span>`;continue;}
+    if(!L.length){cells+=`<span class="cd off${tc}"><span class="n">${d}</span><svg class="tal" aria-hidden="true"></svg></span>`;continue;}
     const st2=L.map(pst),won=st2.filter(x=>x==="won").length,fin=st2.filter(x=>x==="won"||x==="lost").length;
     const k=won===L.length?" all":fin===L.length?" done":st2.some(x=>x)?" some":"";
-    cells+=`<button class="cd${k}${tc}${ds2===calD?" sel":""}" data-d="${ds2}" aria-label="${esc(MONL[m-1]+" "+d)}, ${won} of ${L.length} solved"><span class="n">${d}</span><span class="cdots">${st2.map(x=>`<i class="${x}"></i>`).join("")}</span></button>`;
+    cells+=`<button class="cd${k}${tc}${ds2===calD?" sel":""}" data-d="${ds2}" aria-label="${esc(MONL[m-1]+" "+d)}, ${won} of ${L.length} solved"><span class="n">${d}</span><svg class="tal" viewBox="0 0 30 14" aria-hidden="true">${["won","lost","mid"].flatMap(k=>st2.filter(x=>x===k)).map((x,j)=>`<path class="${x}" d="${TALLY[j%5]}"></path>`).join("")}</svg></button>`;
   }
   const L=dayList(P.findIndex(p=>p.date===calD)),won=L.filter(i=>pst(i)==="won").length;
   const [cy,cm,cdd]=calD.split("-").map(Number),wd=WD[new Date(cy,cm-1,cdd).getDay()];
