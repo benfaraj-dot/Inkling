@@ -157,6 +157,30 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 .key{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--soft);font-size:14px}
 .key i{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:5px;border-radius:4px;border:2px solid var(--pen)}
 .key .k1{border-style:dashed}.key .k2{background:var(--pen)}
+.cal{display:grid;gap:8px}
+.calh{display:flex;align-items:center;justify-content:space-between}
+.calh b{font:700 30px/1 Caveat,cursive;color:var(--pen)}
+.calh .nb:disabled{opacity:.2;cursor:default}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cw{text-align:center;font:700 14px/1.4 Kalam,cursive;color:var(--soft)}
+.cd{appearance:none;position:relative;min-height:48px;border:2px solid color-mix(in srgb,var(--ink) 60%,transparent);border-radius:12px 5px 10px 6px/6px 10px 5px 12px;background:transparent;color:var(--ink);font:700 21px/1 Caveat,cursive;display:grid;grid-template-rows:1fr auto;justify-items:center;align-items:center;gap:2px;padding:4px 1px 6px;cursor:pointer}
+.cd.off{border-color:transparent;color:color-mix(in srgb,var(--soft) 50%,transparent);cursor:default}
+.cd.some{border-style:dashed;border-color:var(--pen)}
+.cd.done{border-color:var(--pen);background:color-mix(in srgb,var(--pen) 14%,transparent)}
+.cd.all{background:var(--pen);border-color:var(--pen);color:var(--card)}
+.cd.today .n{text-decoration:underline 2.5px var(--red);text-underline-offset:3px}
+.cd.sel{outline:2.5px solid var(--red);outline-offset:2px}
+.cd:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.cdots{display:flex;gap:2px;height:5px}
+.cdots i{width:5px;height:5px;box-sizing:border-box;border-radius:50%;border:1.5px solid color-mix(in srgb,currentColor 55%,transparent)}
+.cdots i.mid{border-color:var(--pen);background:linear-gradient(90deg,var(--pen) 50%,transparent 50%)}
+.cdots i.won{border-color:var(--pen);background:var(--pen)}
+.cdots i.lost{border-color:var(--red);background:var(--red)}
+.cd.all .cdots i{border-color:var(--card);background:var(--card)}
+.cd.all .cdots i.lost{background:var(--red)}
+.cday{display:grid;gap:8px;border-top:2px dashed color-mix(in srgb,var(--ink) 25%,transparent);padding-top:10px}
+.cday h4{margin:0;font:700 24px/1.1 Caveat,cursive}
+.cday h4 small{font:400 15px/1 Kalam,cursive;color:var(--soft);margin-left:6px}
 .stage{position:relative;height:128px;margin:-4px 0 -6px}
 .stage::after{content:"";position:absolute;left:0;right:0;top:115px;height:2.5px;border-radius:2px;background:var(--ink)}
 #bl{position:absolute;right:2px;top:0;width:76px;height:128px;overflow:visible;z-index:1;--glow:light-dark(transparent,rgba(248,244,234,.24));background:radial-gradient(ellipse 62% 48% at 50% 52%,var(--glow),transparent 72%)}
@@ -240,7 +264,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
   </div>
 </section>
 
-<footer id="foot"><span class="nx">New pages in <b class="tmr">--:--:--</b></span><br><button class="lnk" id="statsbtn">Your stats</button> · Your progress saves in this browser.</footer>
+<footer id="foot"><span class="nx">New pages in <b class="tmr">--:--:--</b></span><br><button class="lnk" id="calbtn">Calendar</button> · <button class="lnk" id="statsbtn">Your stats</button> · Your progress saves in this browser.</footer>
 </main>
 
 <div class="sheet" id="statsh" hidden>
@@ -251,13 +275,12 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 </div>
 <div class="nah" id="nah" aria-live="assertive"></div>
 <div class="sheet" id="sheet" hidden>
-  <div class="panel" role="dialog" aria-modal="true" aria-label="All pages">
-    <div class="ph"><h2>All pages</h2><button class="nb" id="close" aria-label="Close">&times;</button></div>
-    <h3 id="dH">Daily pages</h3>
-    <div class="pgs" id="days"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Calendar">
+    <div class="ph"><h2>Calendar</h2><button class="nb" id="close" aria-label="Close">&times;</button></div>
+    <div class="cal" id="cal"></div>
     <h3>The first notebook</h3>
     <div class="pgs" id="pages"></div>
-    <div class="key"><span><i class="k1"></i>started</span><span><i class="k2"></i>solved</span><span>crossed out: ran out of ink</span></div>
+    <div class="key"><span><i class="k1"></i>started</span><span><i class="k2"></i>solved</span><span>crossed out or red dot: ran out of ink</span><span>one dot per puzzle; a filled day means all of them are solved</span></div>
     <button class="btn" id="statsbtn3">Your stats</button>
     <button class="btn" id="erase">Erase this page and start over</button>
   </div>
@@ -267,6 +290,7 @@ footer{margin-top:auto;text-align:center;color:var(--soft);font-size:14px}
 {
 const K="inklings.v1",EMO=["\u{1F7E8}","\u{1F7E9}","\u{1F7E6}","\u{1F7EA}"];
 const MISS=["nope","not quite","hmm, no","out of ink"];
+const MONL=["January","February","March","April","May","June","July","August","September","October","November","December"],WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const $=s=>document.querySelector(s);
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -274,6 +298,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sleep=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
 const pad=n=>String(n).padStart(2,"0");
 const now=new Date(),TODAY=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+let calD="",calM="";
 let blOff=false,GS={},P=[],S={},cur=0,sel=[],busy=false,revealing=false,looking=false,noteT=0,lastDay="";
 
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
@@ -566,10 +591,33 @@ function waveFlag(){
 function go(i){cur=(i+P.length)%P.length;sel=[];hideBub();setLook(false);save();render();stopDance();rest();}
 
 function pb(i){const s=S[i];const c=s&&s.done?(s.won?"won":"lost"):(s&&s.guesses.length?"mid":"");const d=P[i].date;return `<button class="pb ${c}${i===cur?" cur":""}" data-i="${i}" aria-label="${esc(label(i))}">${d?dayList(i).indexOf(i)+1:esc(P[i].n||i+1)}</button>`;}
+function pst(i){const s=S[i];return s&&s.done?(s.won?"won":"lost"):(s&&s.guesses&&s.guesses.length?"mid":"");}
+function calendar(ds){
+  const c=$("#cal");if(!ds.length){c.hidden=true;return;}c.hidden=false;
+  const has=new Set(ds),months=[...new Set(ds.map(d=>d.slice(0,7)).concat(TODAY.slice(0,7)>ds[0].slice(0,7)?[TODAY.slice(0,7)]:[]))].sort();
+  if(!calD||!has.has(calD))calD=ds[ds.length-1];
+  if(!months.includes(calM))calM=calD.slice(0,7);
+  const mi=months.indexOf(calM),[y,m]=calM.split("-").map(Number),first=new Date(y,m-1,1).getDay(),n=new Date(y,m,0).getDate();
+  let cells=["S","M","T","W","T","F","S"].map(w=>`<span class="cw" aria-hidden="true">${w}</span>`).join("")+"<span></span>".repeat(first);
+  for(let d=1;d<=n;d++){
+    const ds2=`${calM}-${pad(d)}`,L=has.has(ds2)?P.reduce((a,p,j)=>(p.date===ds2&&a.push(j),a),[]):[];
+    const tc=ds2===TODAY?" today":"";
+    if(!L.length){cells+=`<span class="cd off${tc}"><span class="n">${d}</span><span class="cdots"></span></span>`;continue;}
+    const st2=L.map(pst),won=st2.filter(x=>x==="won").length,fin=st2.filter(x=>x==="won"||x==="lost").length;
+    const k=won===L.length?" all":fin===L.length?" done":st2.some(x=>x)?" some":"";
+    cells+=`<button class="cd${k}${tc}${ds2===calD?" sel":""}" data-d="${ds2}" aria-label="${esc(MONL[m-1]+" "+d)}, ${won} of ${L.length} solved"><span class="n">${d}</span><span class="cdots">${st2.map(x=>`<i class="${x}"></i>`).join("")}</span></button>`;
+  }
+  const L=dayList(P.findIndex(p=>p.date===calD)),won=L.filter(i=>pst(i)==="won").length;
+  const [cy,cm,cdd]=calD.split("-").map(Number),wd=WD[new Date(cy,cm-1,cdd).getDay()];
+  c.innerHTML=`<div class="calh"><button class="nb" data-cm="-1" aria-label="Previous month"${mi<=0?" disabled":""}>&lsaquo;</button><b>${MONL[m-1]} ${y}</b><button class="nb" data-cm="1" aria-label="Next month"${mi>=months.length-1?" disabled":""}>&rsaquo;</button></div>
+  <div class="cgrid">${cells}</div>
+  <div class="cday"><h4>${calD===TODAY?"Today":wd}, ${esc(MONL[cm-1])} ${cdd}<small>${won} of ${L.length} solved</small></h4><div class="pgs">${L.map(pb).join("")}</div></div>`;
+  c.dataset.months=months.join(",");
+}
 function pages(){
   const idx=P.map((_,i)=>i);
   const ds=[...new Set(idx.filter(i=>P[i].date).map(i=>P[i].date))].sort().reverse(),old=idx.filter(i=>!P[i].date);
-  $("#days").innerHTML=ds.map(d=>`<span class="dh">${d===TODAY?"today":esc(fmt(d))}</span>`+idx.filter(i=>P[i].date===d).map(pb).join("")).join("");$("#dH").hidden=$("#days").hidden=!ds.length;
+  calendar(ds.slice().reverse());
   $("#pages").innerHTML=old.map(pb).join("");
 }
 const fmtT=ms=>{if(!(ms>0))return "—";const t=Math.round(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),x=t%60;return h?`${h}:${pad(m)}:${pad(x)}`:`${m}:${pad(x)}`;};
@@ -599,7 +647,7 @@ function statsHTML(){
 }
 function openStats(){$("#stbody").innerHTML=statsHTML();$("#sheet").hidden=true;$("#statsh").hidden=false;$("#stclose").focus();}
 function closeStats(){$("#statsh").hidden=true;}
-function openSheet(){pages();$("#sheet").hidden=false;$("#close").focus();}
+function openSheet(){calD=P[cur]&&P[cur].date||"";calM=calD.slice(0,7);pages();$("#sheet").hidden=false;$("#close").focus();}
 function closeSheet(){$("#sheet").hidden=true;$("#pg").focus();}
 
 $("#grid").addEventListener("click",e=>{
@@ -626,10 +674,13 @@ $("#nextp").addEventListener("click",()=>P.length&&go(cur+1));
 $("#next").addEventListener("click",()=>go(cur+1));
 $("#pg").addEventListener("click",()=>P.length&&openSheet());
 $("#close").addEventListener("click",closeSheet);
+$("#calbtn").addEventListener("click",()=>P.length&&openSheet());
 ["#statsbtn","#statsbtn2","#statsbtn3"].forEach(q=>$(q).addEventListener("click",openStats));
 $("#stclose").addEventListener("click",closeStats);
 $("#statsh").addEventListener("click",e=>{if(e.target.id==="statsh")closeStats();});
-$("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();const b=e.target.closest(".pb");if(b){go(+b.dataset.i);closeSheet();}});
+$("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();
+  const cd=e.target.closest(".cd[data-d]");if(cd){calD=cd.dataset.d;pages();return;}
+  const mv=e.target.closest("[data-cm]");if(mv&&!mv.disabled){const ms=$("#cal").dataset.months.split(","),j=ms.indexOf(calM)+Number(mv.dataset.cm);if(ms[j]){calM=ms[j];const dd=[...new Set(P.filter(p=>p.date&&p.date.startsWith(calM)).map(p=>p.date))].sort();if(dd.length)calD=dd[dd.length-1];pages();}return;}const b=e.target.closest(".pb");if(b){go(+b.dataset.i);closeSheet();}});
 $("#erase").addEventListener("click",()=>{delete S[cur];sel=[];save();render();closeSheet();note("fresh page");});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#statsh").hidden){closeStats();return;}if(e.key==="Escape"){if(!$("#sheet").hidden)closeSheet();else if(looking)setLook(false);}});
 $("#copy").addEventListener("click",()=>{
