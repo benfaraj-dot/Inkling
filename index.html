@@ -106,9 +106,9 @@ nav{display:flex;align-items:center;gap:2px}
 @keyframes nah{0%{opacity:0;transform:scale(3.2) rotate(-18deg)}10%{opacity:1;transform:scale(.88) rotate(-4deg)}15%{transform:scale(1.08) rotate(2deg)}20%{transform:translate(-8px,4px)}25%{transform:translate(8px,-5px)}30%{transform:translate(-6px,-3px)}35%{transform:translate(5px,5px)}40%{transform:translate(0,0)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
 .jolt{animation:jolt .45s linear}
 @keyframes jolt{15%{transform:translate(-10px,6px) rotate(-.6deg)}30%{transform:translate(9px,-7px) rotate(.5deg)}45%{transform:translate(-7px,-4px)}60%{transform:translate(6px,5px)}80%{transform:translate(-3px,2px)}}
-#blfig .w1,#blfig .w2,#blfig .w3{transform-box:fill-box;transform-origin:center;animation:whyp 2.4s ease-out infinite;opacity:0}
+#blfig .w1,#blfig .w2,#blfig .w3{transform-box:fill-box;transform-origin:center;animation:whyp .5s ease-out forwards;opacity:0}
 #blfig .w2{animation-delay:.6s}#blfig .w3{animation-delay:1.2s}
-@keyframes whyp{0%{opacity:0;scale:.4}10%{opacity:1;scale:1.15}16%{scale:1}80%{opacity:1}100%{opacity:0;scale:1}}
+@keyframes whyp{0%{opacity:0;scale:.4}60%{opacity:1;scale:1.15}100%{opacity:1;scale:1}}
 .coin:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .tile.odd{outline:3px solid var(--red);outline-offset:2px}
 .tile.gold{outline:3px solid #e0a526;outline-offset:2px;background:color-mix(in srgb,#e0a526 22%,var(--card))}
@@ -430,7 +430,6 @@ function blShow(svg,motion,calm){
   const ok=BL&&BL.motions&&BL.motions.includes(motion);
   $("#blmv").setAttribute("class","m-"+(ok?motion:"none")+(calm?" calm":""));
 }
-$("#blfig").addEventListener("animationiteration",e=>{const g=e.target.closest&&e.target.closest(".w1,.w2,.w3");if(g)wLine(g);});
 const CALM=new Set(["idle","pick1","pick2","pick3","pick4","look","cheat","tip"]);
 function stopDance(){clearTimeout(blDance);blDance=0;}
 function emote(key,hold){
