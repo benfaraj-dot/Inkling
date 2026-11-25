@@ -7,6 +7,7 @@
   python3 tools/blurbo.py render out.png [filter]   contact sheet of every figure
   python3 tools/blurbo.py smoke out.png     load the real index.html and show every figure in the game
   python3 tools/blurbo.py props out.png     sheet of every prop in the library (red dot = its 0,0 anchor)
+  python3 tools/blurbo.py puzzles [date]    validate puzzles.json (5 boards for the date, default today in New York)
 
 Outfits live in blurbo.json "outfits": {name: {"for", "replace": {partId: full <g id=partId> markup},
 "layer": {partId: markup drawn on top of that part}, "css": "rules"}}. Layered parts keep the
@@ -27,7 +28,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'blurbo.json')
 REQUIRED = ['pud', 'legs', 'torso', 'hd', 'ey', 'gr', 'gb', 'gl', 'mic', 'gs', 'sp']
 MOTIONS = ['none', 'bob', 'sway', 'shake', 'bounce', 'wiggle', 'float', 'pulse', 'melt', 'stretch', 'spin']
-TRIGGERS = ['idle', 'pick1', 'pick2', 'pick3', 'pick4', 'correct', 'wrong', 'oneaway', 'look', 'lose', 'escape', 'hint', 'cheat']
+TRIGGERS = ['idle', 'pick1', 'pick2', 'pick3', 'pick4', 'correct', 'wrong', 'oneaway', 'look', 'lose', 'escape', 'hint', 'cheat', 'tip']
 
 def load(): return json.load(open(PATH, encoding='utf-8'))
 def save(b):
@@ -184,6 +185,7 @@ def smoke(png):
     srv = socketserver.TCPServer(('127.0.0.1', 0), H); port = srv.server_address[1]
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     b = load(); shots = []; bad = []
+    skip = {c['id'] for key in ('falls', 'rises') for c in b.get(key, [])}
     with sync_playwright() as p:
         br = p.chromium.launch(); pg = br.new_page(viewport={'width': 420, 'height': 400}, device_scale_factor=2)
         pg.goto('http://127.0.0.1:%d/index.html' % port); pg.wait_for_function('document.querySelector("#bldefs").children.length>0')
@@ -191,7 +193,7 @@ def smoke(png):
         for n, svg, m in figures(b):
             pg.evaluate('([s,m])=>{document.querySelector("#blfig").innerHTML=s;document.querySelector("#blmv").setAttribute("class","m-none")}', [svg, m])
             box = pg.evaluate('(()=>{const r=document.querySelector("#blfig").getBBox();return [r.width,r.height]})()')
-            if box[0] < 60 or box[1] < 200: bad.append(n)
+            if (box[0] < 60 or box[1] < 200) and n.split('#')[0] not in skip: bad.append(n)  # falls and rises shrink into the puddle on purpose
             shots.append((n, base64.b64encode(pg.locator('#bl').screenshot()).decode()))
         cells = ''.join('<div style="display:inline-block;margin:3px;text-align:center;font:10px sans-serif;background:#f6f1e3"><img src="data:image/png;base64,%s" style="height:150px"><br>%s</div>' % (s, n) for n, s in shots)
         pg2 = br.new_page(viewport={'width': 1200, 'height': 400}); pg2.set_content('<body style="margin:0">%s</body>' % cells)
@@ -199,6 +201,42 @@ def smoke(png):
     srv.shutdown()
     print('game smoke test: %d figures, %d look broken %s -> %s' % (len(shots), len(bad), bad, png))
     return not bad
+
+def check_puzzles(day=None):
+    import datetime
+    try:
+        from zoneinfo import ZoneInfo
+        day = day or datetime.datetime.now(ZoneInfo('America/New_York')).date().isoformat()
+    except Exception:
+        day = day or datetime.date.today().isoformat()
+    P = json.load(open(os.path.join(ROOT, 'puzzles.json'), encoding='utf-8'))
+    errs = []
+    if [e.get('n') for e in P] != list(range(1, len(P) + 1)): errs.append('n is not sequential from 1')
+    for e in P:
+        n = e.get('n'); g = e.get('g', [])
+        if len(g) != 4 or any(len(x) != 2 or len(x[1]) != 4 for x in g): errs.append('#%s: needs 4 groups of 4' % n); continue
+        ws = [w for x in g for w in x[1]]
+        if len(set(ws)) != 16: errs.append('#%s: words not unique' % n)
+        if any(w != w.upper() or '-' in w for w in ws): errs.append('#%s: words must be uppercase, no hyphens' % n)
+        d = e.get('d', {})
+        if set(d) != set(ws): errs.append('#%s: definitions must cover exactly the 16 words' % n)
+        if any(not isinstance(v, list) or len(v) != 2 or '-' in v[1] for v in d.values()): errs.append('#%s: bad definition entry' % n)
+        h = e.get('h')
+        if not (isinstance(h, list) and len(h) == 4 and all(isinstance(x, str) and x.strip() for x in h)): errs.append('#%s: needs "h", 4 hint strings in group order' % n)
+        else:
+            for i, x in enumerate(h):
+                low = ' %s ' % re.sub(r'[^a-z ]', ' ', x.lower())
+                bad = [w for w in ws if ' %s ' % w.lower() in low]
+                if bad: errs.append('#%s hint %d gives away board words %s' % (n, i, bad))
+                if '-' in x: errs.append('#%s hint %d has a hyphen' % (n, i))
+    dated = [e for e in P if e.get('date')]
+    if [e['date'] for e in dated] != sorted(e['date'] for e in dated): errs.append('dated entries are not in date order')
+    from collections import Counter
+    for dt, c in Counter(e['date'] for e in dated).items():
+        if c > 5: errs.append('%s has %d boards (max 5)' % (dt, c))
+    today = [e for e in P if e.get('date') == day]
+    if len(today) != 5: errs.append('%s has %d boards, needs 5' % (day, len(today)))
+    return errs
 
 if __name__ == '__main__':
     a = sys.argv[1:] or ['status']
@@ -218,4 +256,6 @@ if __name__ == '__main__':
         e = check(b); print('\n'.join(e) if e else 'blurbo.json OK'); sys.exit(1 if e else 0)
     elif a[0] == 'render': render(b, a[1], a[2] if len(a) > 2 else None)
     elif a[0] == 'props': props_sheet(b, a[1])
+    elif a[0] == 'puzzles':
+        e = check_puzzles(a[1] if len(a) > 1 else None); print('\n'.join(e) if e else 'puzzles.json OK'); sys.exit(1 if e else 0)
     elif a[0] == 'smoke': sys.exit(0 if smoke(a[1]) else 1)
