@@ -422,11 +422,15 @@ function pickV(list,key){
   const v=pool[Math.floor(Math.random()*pool.length)]||pool[0];
   blLast[key]=v.id;return v;
 }
+function wLine(g){const L=BL&&Array.isArray(BL.cheatLines)?BL.cheatLines:[],t=g.querySelector("text");if(!L.length||!t)return;const on=[...document.querySelectorAll("#blfig .w1 text,#blfig .w2 text,#blfig .w3 text")].map(x=>x.textContent),c=L.filter(x=>!on.includes(x));t.textContent=(c.length?c:L)[Math.floor(Math.random()*(c.length||L.length))];}
+function wLines(){document.querySelectorAll("#blfig .w1,#blfig .w2,#blfig .w3").forEach(wLine);}
 function blShow(svg,motion,calm){
   $("#blfig").innerHTML=svg||"";
+  wLines();
   const ok=BL&&BL.motions&&BL.motions.includes(motion);
   $("#blmv").setAttribute("class","m-"+(ok?motion:"none")+(calm?" calm":""));
 }
+$("#blfig").addEventListener("animationiteration",e=>{const g=e.target.closest&&e.target.closest(".w1,.w2,.w3");if(g)wLine(g);});
 const CALM=new Set(["idle","pick1","pick2","pick3","pick4","look","cheat","tip"]);
 function stopDance(){clearTimeout(blDance);blDance=0;}
 function emote(key,hold){
